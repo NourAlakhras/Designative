@@ -1,0 +1,211 @@
+
+body{
+    background: #F6F0F4;
+}
+.btn{
+	background-color:#C56B85;
+}
+.btn:hover {
+	background:#345D7D;
+}
+#label{
+	color:white;
+	font-weight:bold;
+}
+/* Set styles for header */
+.header {
+	z-index: 1;
+	height: 100%;
+	min-height: 100px;
+	background-color: #F6F0F4;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	flex-direction:row;
+	padding-bottom: 20px;
+}
+.right-header{
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	flex-direction:row;
+}
+/* Set styles for header logo */
+.header .navbar-brand-div {
+	margin-right:10px;
+	float:inline-start;
+}
+.header .navbar-brand {
+	font-size: 2.2rem;
+	font-weight: 700;
+}
+/* Set styles for first part of logo */
+.navbar-brand span:first-child {
+	color: #c56b85;
+}
+/* Set styles for second part of logo */
+.navbar-brand span:last-child {
+	color: #345d7d;
+}
+/*set styles for nav bar*/
+.navbar-collapse a {
+	font-size: 1.1rem !important;
+	font-weight: 500 !important;
+	color: #345d7d !important;
+	transition: color 0.2s ease-in-out;
+	/* add a transition effect */
+}
+.navbar-collapse a:hover{
+	color: #6c3c49 !important;
+}
+.navbar-toggler {
+	font-size: 0.8rem;
+	font-weight: 500;
+	border: solid 2px #345d7d;
+}
+@media (max-width: 992px) {
+	.header {
+		justify-content: center;
+	}
+	.searchBox-container{
+		float: right;
+	}
+	.searchBox{
+		float: right;
+	}
+	.searchInput{  
+		background: #F6F0F4;
+		color : #C56B85;
+	}
+}
+.navbar-brand {
+	margin-right: 0;
+	margin-bottom: 10px;
+}
+.navbar-toggler {
+	margin-left: 20px;
+}
+.navbar-nav.ms-auto.align-items-center {
+	justify-content: center;
+}
+.navbar-collapse a {
+	width: 100%;
+	text-align: center;
+}
+.navbar-collapse {
+	border-radius: 20px;
+	width: auto;
+}
+
+
+
+/*search box*/
+.searchBox-container{
+	margin-right:10px;
+	width:50%;
+}
+.searchBox {
+	float: right;
+    transform: translateY(-50%,50%);
+    background: white;
+    height: 2.5rem !important;
+    border-radius: 10%;
+	font-size:1.0em;
+}
+.searchBox:hover > .searchInput {
+	width:40%;
+    padding: 0em 0.2em;
+	color : #C56B85;
+	font-size:1.0em;
+}
+.searchBox:hover > .searchButton {
+  background: #F6F0F4;
+  color : #C56B85;
+}
+.searchButton {
+    color: white;
+    float: right;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    border-radius: 10%;
+    background: #C56B85;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+	border:none;
+}
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: #C56B85;
+    font-size: 1.2em;
+    transition: 0.4s;
+    line-height: 2.5em;
+    width: 0em;
+}
+/*profile icon list/menu*/
+ul {
+	list-style: none;
+}
+.user-menu-wrap {
+	width: 0.1em;
+	z-index:1;
+}
+.menu-container {
+	visibility: hidden;
+	opacity: 0;
+}
+.menu-container.active {
+	visibility: visible;
+	opacity: 1;
+	transition: all 0.2s ease-in-out;
+}
+
+.user-menu {
+	position: absolute;
+	right: 0%;
+	background-color: #F6F0F4;
+	width: 10.3em;
+	border-radius: 0.3em;
+	border: 0.1em solid rgba(0, 0, 0, 0.15);
+	padding-top: 0.2em;
+	padding-bottom: 0.3em;
+	margin-top: 0.6em;
+}
+.user-menu .profile-highlight {
+	display: flex;
+	border-bottom: 0.1em solid #e0e0e0;
+	padding: 0.3em;
+}
+.user-menu .profile-highlight img {
+	width: 2.0em;
+	height: 2.0em;
+	object-fit: cover;
+}
+.user-menu .profile-highlight .details {
+	display: flex;
+	flex-direction: column;
+	margin: auto 1.0em;
+}
+.user-menu .profile-highlight .details #profile-name {
+	font-weight: 700;
+	font-size: 1.0em;
+}
+.user-menu .footer {
+	border-top: 0.1em solid #e0e0e0;
+}
+.user-menu .footer .user-menu-link {
+	font-size: 1.0em;
+}
+.user-menu .user-menu-link {
+	display: flex;
+	text-decoration: none;
+	color: #345D7D;
+	font-weight: 500;
+	font-size: 1.0em;
+	padding: 0.75em 0em;
+}

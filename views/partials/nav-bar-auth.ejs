@@ -1,0 +1,121 @@
+<header class="header d-flex flex-wrap container-fluid">
+    <div class="navbar-brand-div">
+        <!-- logo and brand name -->
+        <a class="navbar-brand" href="/">
+            <span>Design</span><span>ative</span>
+        </a>
+    </div>
+
+
+    <!--category menu-->
+    <div class="category-container">
+        <div class="btn-group">
+            <button type="button" class="category-main-btn btn text-white"
+                style="font-size:14px; font-weight:bold; height:38px;"><a href="/category" style="text-decoration: none; color: white;" >Category</a></button>
+            <button type="button" class="btn text-white dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"></button>
+            <div class="dropdown-menu dropdown-menu-start dropdown-menu-end">
+                <a id="category" class="dropdown-item" href="/projects?category=Filmmaker" style="font-size:14px;">FilmMaker</a>
+                <a id="category" class="dropdown-item" href="/projects?category=Web Designer" style="font-size:14px;">Web Designer</a>
+                <a id="category" class="dropdown-item" href="/projects?category=Brand Designer" style="font-size:14px;">Brand Designer</a>
+                <a id="category" class="dropdown-item" href="/projects?category=Video Game Designer" style="font-size:14px;">Video Game</a>
+                <a id="category" class="dropdown-item" href="/projects?category=Animator" style="font-size:14px;">Animator</a>
+                <a id="category" class="dropdown-item" href="/projects" style="font-size:14px;">All Projects</a>
+            </div>
+        </div>
+    </div>
+    
+     <!--Search box-->
+    <div class="searchBox-container">
+        <form action="/projects" method="get">
+        <div class="searchBox">
+            <button class="searchButton" href="#">
+                <i class="material-icons">
+                    <ion-icon name="search-circle-outline" style="font-size:30px;"></ion-icon>
+                </i>
+            </button>
+            <input class="searchInput" type="text" name="search" placeholder="Search">
+        </div>
+        </form>
+    </div>
+    <% if(role == 'admin'){ %>
+    <div class="">
+        <a href="admin/" role="button" class="category-main-btn btn text-white">Dashboard</a>
+    </div>     
+    <% } %>
+    
+    <div class="right-header float-end">
+        <!--Profile menu-->
+        <div class="user-menu-wrap">
+            <% if (image) { %>
+                <a class="mini-photo-wrapper" href="#"><img class="mini-photo rounded-circle" src="/uploads/<%= image %>" width="36" height="36" /></a>
+
+            <% } else { %>
+                <a class="mini-photo-wrapper" href="#"><img class="mini-photo rounded-circle" src="/images/profilev2.png" width="36" height="36" /></a>
+
+            <% }%>
+
+            <div class="menu-container">
+                <ul class="user-menu">
+                    <div class="profile-highlight">
+                        <% if (image) { %>
+                            <img class="rounded-circle" src="/uploads/<%= image %>" alt="profile-img" width="20" height="20" />
+            
+                        <% } else {%>
+                            <img class="rounded-circle" src="/images/profilev2.png" alt="profile-img" width="20" height="20" />
+            
+                        <% }%>
+            
+                        <div class="details">
+                            <div id="profile-name"><%= name %></div>
+                        </div>
+                    </div>
+
+                    <li class="user-menu__item">
+                        <a class="user-menu-link" href="/profile">
+                            <ion-icon name="person-outline" style="padding-top:0.2em;"></ion-icon>
+                            <div>Profile</div>
+                        </a>
+                    </li>
+
+                    <li class="footer" style="padding:0;">
+                        <li class="user-menu__item">
+                            <a class="user-menu-link" href="/logout" style="color: #F44336;">
+                                <ion-icon name="log-out-outline"></ion-icon>Logout
+                            </a>
+                        </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--notification button-->
+        <div class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" href="/page.html">
+                <i class="bi bi-bell-fill"></i>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right notifications" aria-labelledby="navbarDropdown">
+                <div class="notification-heading">
+                    <h4 class="menu-title">Notifications</h4>
+                </div>
+
+                <li class="divider"></li>
+                <div class="notifications-wrapper">
+                    <% if (notifications.length > 0) { %>
+                        <% notifications.forEach(notification => { %>
+                            <a class="content" href="#">
+                                <div class="notification-item">
+                                    <h4 class="item-title"><%= notification.message %></h4>
+                                </div>
+                            </a>
+                        <% }) %>
+
+                    <% } %>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

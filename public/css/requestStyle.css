@@ -1,0 +1,113 @@
+body { 
+
+	overflow-x:hidden;
+    background: #F6F0F4 !important;
+}
+.btn{
+	background-color:#C56B85 !important;
+
+}
+.btn:hover {
+	background:#345D7D;
+}
+#label{
+	color:white;
+	font-weight:bold;
+}
+.category-container{
+	margin-left: 2rem;
+	margin-top: 1rem;
+	
+}
+/* Float four columns side by side */
+.column {
+
+    width: 20%;
+    padding: 0 10px;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block ;
+      margin-bottom: 20px;
+    }
+  }
+ 
+.btn {
+	
+	color: white !important;
+	font-weight: bold !important;
+}
+
+.btn:hover {
+	background: #345D7D !important;
+}
+
+#label {
+	color: white;
+	font-weight: bold;
+}
+
+.card-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: #345D7D;
+    
+}
+h6{font-family: 'Roboto', sans-serif;
+color:#345D7D;
+}
+
+.card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card {
+    max-height: 400px;
+    overflow: hidden;
+}
+.hidden {
+    display: none;
+}
+.card-text{
+    font-family: 'Ysabeau';
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #C56B85;
+    text-align: justify;
+}
+.read-more , .read-less{
+    color: #725a7a;
+    font-family: 'Ysabeau';
+    font-size: 1rem;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    height: 40px;
+  }
+  
+
+ 

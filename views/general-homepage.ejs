@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>General</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/headerStyle.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Ysabeau' rel='stylesheet'>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+	<style>
+		body {
+			background: #F6F0F4;
+		}
+
+		.btn {
+			background-color: #C56B85;
+
+		}
+
+		.btn:hover {
+			background: #345D7D;
+		}
+
+		#label {
+			color: white;
+			font-weight: bold;
+		}
+
+		.category-container {
+			margin-left: 2rem;
+			margin-top: 1rem;
+
+		}
+
+		@import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+	</style>
+</head>
+
+<body onload="provideName()">
+	<!--profile menu to open & close-->
+	<%- include('partials/nav-bar-auth.ejs') %>
+		<script>
+			document.querySelector('.mini-photo-wrapper').addEventListener('click', function () {
+				document.querySelector('.menu-container').classList.toggle('active');
+			});
+		</script>
+		<main>
+			<div class="patterns " style="padding: 5%">
+				<svg style="width:100%; height:500px;">
+					<defs>
+						<pattern id="polka-dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+							<circle fill="#F7D6E1" cx="25" cy="25" r="3"></circle>
+						</pattern>
+					</defs>
+
+					<rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
+					<text id="welcoming" x="10%" y="30%">Welcome <%= name %>!</text>
+					<text id="welcoming2" x="15%" y="48%">Nice to meet you! </text>
+
+					<text id="welcoming3" x="16%" y="60%" style="letter-spacing: 2.5px;">Designative is a platform that
+						connects freelancers multimedia specialists with
+					</text>
+					<text id="welcoming3" x="16%" y="65%" style="letter-spacing: 2.53px;">individuals or corporations in
+						need of design work providing opportunities for
+					</text>
+					<text id="welcoming3" x="16%" y="70%">freelancers to showcase their work and experience, and get
+						benefit from companies
+					</text>
+					<text id="welcoming3" x="16%" y="75%" style="letter-spacing: 1.3px;">and individual's need. Beside
+						that we assest individuals and corporations to find the right
+					</text>
+					<text id="welcoming3" x="16%" y="80%">talent without committing to a particular worker.
+					</text>
+
+				</svg>
+			</div>
+
+			<hr style="color: black; ">
+			<p class="sentence2"> <span class="fancy">Visionaries </span></p>
+			<div class="w">
+				<div class="box">
+					<div class="imgBx">
+						<img src="/images/web.jpg">
+					</div>
+					<div class="content">
+						<div>
+							<h2>Web Developer</h2>
+							<p>design and create websites using programming languages, tools, and frameworks.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="imgBx">
+						<img src="/images/designer.jpg">
+					</div>
+					<div class="content">
+						<div>
+							<h2>Animator</h2>
+							<p>create visual effects, motion graphics, and animated content for various mediums such as
+								films and television shows by using computer software and animation techniques.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="imgBx">
+						<img src="/images/filmmaker.jpg">
+					</div>
+					<div class="content">
+						<div>
+							<h2>Filmmaker</h2>
+							<p>create films or videos by conceptualizing, planning, directing, and editing the
+								production process to convey a story, message, or artistic vision.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="imgBx">
+						<img src="/images/animator.jpg">
+					</div>
+					<div class="content">
+						<div>
+							<h2>Brand Designer</h2>
+							<p>create and develop visual and graphic elements such as logos and other brand assets to
+								establish a recognizable and consistent brand identity for a company.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div class="imgBx">
+						<img src="/images/game.jpg">
+					</div>
+					<div class="content">
+						<div>
+							<h2>Game Developer</h2>
+							<p>design, develop, and program video games for various platforms using programming
+								languages, game engines, and other tools.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p class="sentence">crafting engaging </p>
+			<p class="sentence3"> <span class="fancy">digital worlds</span></p>
+			</div>
+		</main>
+		<!--Footer & nav-->
+		<%- include('partials/footer.ejs') %>
+			<script>
+				<!-- function provideName(){
+					// alert("This will Appear\nBefore any Contents" );
+					var name= ;			
+					// the elemet you are refering to must exist before this embeded script
+					document.getElementById("welcoming").innerHTML="Welcome "+ name +"!";
+				} -->
+			</script>
+</body>
+
+</html>

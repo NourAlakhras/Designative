@@ -1,0 +1,171 @@
+/*Background color*/
+body {
+	background: linear-gradient(45deg, #345D7D, #695B7B, #C26A86,#F7D6E1);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/*welcome back color*/
+.gradient-text {
+  /* Fallback: Set a background color. */
+	background-color: red;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+  /* Create the gradient. */
+	background-image: linear-gradient(45deg,#345D7D,#F7D6E1, #695B7B, #C26A86);
+  
+  /* Set the background size and repeat properties. */
+	background-size: 100%;
+	background-repeat: repeat;
+	
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent; 
+	-moz-background-clip: text;
+	-moz-text-fill-color: transparent;
+	font-size: 50px;
+}
+
+/*login button*/
+.buttons {
+    margin:0;
+    text-align: left;
+}
+
+.btn-hover {
+    width: 150px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 2px;
+	margin-bottom: 30px;
+    height: 40px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 20px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #345D7D,#F7D6E1, #695B7B, #C26A86);
+    
+}
+
+/*input fields*/
+.form {
+  background-color:white;
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 500px;
+  padding: 20px;
+  width: 320px;
+}
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
+    margin-bottom: 30px;
+  
+}
+
+.input {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid lightgray;
+  box-sizing: border-box;
+  color: #345D7D;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+  
+}
+
+.cut {
+  background-color: white;
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  transform: translateY(0);
+  transition: transform 200ms;
+  width: 76px;
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.placeholders {
+  color: gray;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholders,
+.input:not(:placeholder-shown) ~ .placeholders {
+  transform: translateY(-30px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholders {
+  color: #C56B85;
+}
+
+.input:focus ~ .placeholders {
+  color: #C56B85;
+}
+

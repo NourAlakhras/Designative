@@ -1,0 +1,40 @@
+<footer class="footer">
+  <nav class="navbar navbar-expand-lg navbar-light mx-auto">
+    <!-- logo and brand name -->
+    <a class="navbar-brand" href="#"> <span>Design</span><span>ative</span> </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav2"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- menu items and links -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav2">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/about' ? 'active' : '' %>" href="/about"
+            >About Us</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/contact' ? 'active' : '' %>" href="/contact"
+            >Contact Us</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= path === '/faq' ? 'active' : '' %>" href="/faq">FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="text-center copyright">
+    <p>All rights reserved &copy; Designative Team @ 2023</p>
+  </div>
+</footer>

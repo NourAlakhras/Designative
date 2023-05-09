@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,
+				initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="../css/header.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    /* Main CSS Here */
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    :root {
+      --background-color1: #F6F0F4;
+      --background-color2: #F6F0F4;
+      /* --background-color3: #ededed;*/
+      --background-color4: #F6F0F4;
+      --primary-color: #4b49ac;
+      --secondary-color: #345D7D;
+      --Border-color: #725A7A;
+      --one-use-color: #725A7A;
+      --two-use-color: #725A7A;
+    }
+
+    body {
+      background-color: var(--background-color4);
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 70px;
+      width: 100vw;
+      padding: 0 30px;
+      background-color: var(--background-color1);
+      position: relative;
+      z-index: 100;
+      display: flex;
+      /* justify-content: space-between;
+              align-items: center;*/
+    }
+
+    /*HEADER*/
+
+    .icn {
+      height: 40px;
+
+    }
+
+    .menuicn {
+      cursor: pointer;
+    }
+
+    /*HEADER*/
+    .main-container {
+      display: flex;
+      width: 100vw;
+      position: relative;
+      top: 10px;
+      z-index: 1;
+    }
+
+    .main {
+      height: calc(100vh - 70px);
+      width: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 0px 30px 30px 30px;
+    }
+
+    .main::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(to bottom,
+          rgb(0, 0, 85),
+          rgb(0, 0, 50));
+    }
+
+    .main::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .main::-webkit-scrollbar-track {
+      background-color: #9e9e9eb2;
+    }
+
+    .box-container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 50px;
+    }
+
+    .nav {
+      min-height: 91vh;
+      width: 250px;
+      background-color: var(--background-color2);
+      position: absolute;
+      top: 0px;
+      left: 00;
+      box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 30px 0 20px 10px;
+    }
+
+    .navcontainer {
+      height: calc(100vh - 70px);
+      width: 250px;
+      position: relative;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .navcontainer::-webkit-scrollbar {
+      display: none;
+    }
+
+    .navclose {
+      width: 10px;
+    }
+
+    .nav-option {
+      width: 250px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px 0 20px;
+      gap: 20px;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .nav-option:hover {
+      border-left: 5px solid #C56B85;
+      background-color: #F7D6E1;
+      cursor: pointer;
+    }
+
+
+    .nav-upper-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .option1 {
+      border-left: 5px solid #725A7A;
+      background-color: var(--Border-color);
+      color: white;
+      cursor: pointer;
+    }
+
+    .option1:hover {
+      border-left: 5px solid #C56B85;
+      background-color: var(--Border-color);
+    }
+
+    .box {
+      height: 130px;
+      width: 230px;
+      border-radius: 20px;
+      box-shadow: 3px 3px 10px#C56B85;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .box:hover {
+      transform: scale(1.08);
+    }
+
+    .box:nth-child(1) {
+      background-color: var(--one-use-color);
+    }
+
+    .box:nth-child(2) {
+      background-color: var(--two-use-color);
+    }
+
+    .box:nth-child(3) {
+      background-color: var(--one-use-color);
+    }
+
+    .box:nth-child(4) {
+      background-color: var(--two-use-color);
+    }
+
+    .box img {
+      height: 50px;
+    }
+
+    .box .text {
+      color: white;
+    }
+
+    .topic {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .topic-heading {
+      font-size: 30px;
+      letter-spacing: 3px;
+    }
+
+    .report-container {
+
+      min-height: 300px;
+      max-width: 1200px;
+      margin: 70px auto 0px auto;
+      background-color: #F6F0F4;
+      border-radius: 30px;
+      box-shadow: 3px 3px 10px rgb(188, 188, 188);
+      padding: 0px 20px 20px 20px;
+    }
+
+    .report-header {
+
+      height: 80px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 10px 20px;
+      border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+    }
+
+    .recent-Articles {
+      font-size: 30px;
+      font-weight: 600;
+      color: #725A7A;
+    }
+
+    .view {
+      height: 35px;
+      width: 90px;
+      border-radius: 8px;
+      background-color: #725A7A;
+      color: white;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive CSS Here */
+    @media screen and (max-width: 950px) {
+      .nav-img {
+        height: 25px;
+      }
+
+      .nav-option {
+        gap: 30px;
+      }
+
+      .nav-option h3 {
+        font-size: 15px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 800px;
+      }
+    }
+
+    @media screen and (max-width: 850px) {
+      .nav-img {
+        height: 30px;
+      }
+
+      .nav-option {
+        gap: 30px;
+      }
+
+      .nav-option h3 {
+        font-size: 20px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 700px;
+      }
+
+      .navcontainer {
+        width: 100vw;
+        position: absolute;
+        transition: all 0.6s ease-in-out;
+        top: 0;
+        left: -100vw;
+      }
+
+      .nav {
+        width: 100%;
+        position: absolute;
+      }
+
+      .navclose {
+        left: 00px;
+      }
+
+      .searchbar {
+        display: none;
+      }
+
+      .main {
+        padding: 40px 30px 30px 30px;
+      }
+
+    }
+
+    /**FOR HEADER**/
+    @media screen and (max-width: 490px) {
+      .message {
+        display: none;
+      }
+
+      .logosec {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .menuicn {
+        height: 25px;
+      }
+
+      .nav-img {
+        height: 25px;
+      }
+
+      .nav-option {
+        gap: 25px;
+      }
+
+      .nav-option h3 {
+        font-size: 12px;
+
+      }
+
+      .nav-upper-options {
+        gap: 15px;
+      }
+
+      .recent-Articles {
+        font-size: 20px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 550px;
+      }
+    }
+
+    /**For heDER**/
+
+    @media screen and (max-width: 400px) {
+      .recent-Articles {
+        font-size: 17px;
+      }
+
+      .view {
+        width: 60px;
+        font-size: 10px;
+        height: 27px;
+      }
+
+      .report-header {
+        height: 60px;
+        padding: 10px 10px 5px 10px;
+      }
+
+      .searchbtn img {
+        height: 20px;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .recent-Articles {
+        font-size: 12px;
+      }
+
+      .view {
+        width: 50px;
+        font-size: 8px;
+        height: 27px;
+      }
+
+      .report-header {
+        height: 60px;
+        padding: 10px 5px 5px 5px;
+      }
+
+      .t-op {
+        font-size: 12px;
+      }
+
+      .t-op-nextlvl {
+        font-size: 10px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 300px;
+      }
+
+      .report-body {
+        padding: 10px;
+      }
+
+      .label-tag {
+        width: 70px;
+      }
+
+      .searchbtn {
+        width: 40px;
+      }
+
+      .searchbar2 input {
+        width: 180px;
+      }
+    }
+
+    /*TABLE CSS */
+    #dataTable {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      text-align: center;
+    }
+
+    #dataTable td,
+    #dataTable th {
+
+      padding: 8px;
+    }
+
+    #dataTable th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+
+      color: #C56B85;
+    }
+
+    #deletebutton {
+      background-color: #C56B85;
+      width: 100px;
+      color: #F6F0F4;
+      border-color: #C56B85;
+      border-radius: 5%;
+    }
+
+    #viewbutton {
+      background-color: #345D7D;
+      width: 100px;
+      color: #F6F0F4;
+      border-color: #345D7D;
+      border-radius: 5%;
+    }
+
+    body {
+
+      overflow-x: hidden;
+      background: #F6F0F4 !important;
+    }
+
+    .btn {
+      background-color: #C56B85 !important;
+
+    }
+
+    .btn:hover {
+      background: #345D7D;
+    }
+
+    #label {
+      color: white;
+      font-weight: bold;
+    }
+
+    .header {
+      z-index: 1;
+      height: 100%;
+      min-height: 100px;
+      background-color: #F6F0F4;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      padding-bottom: 20px;
+    }
+
+    .right-header {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    /* Set styles for header logo */
+    .header .navbar-brand-div {
+      margin-right: 10px;
+      float: inline-start;
+    }
+
+    .header .navbar-brand {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    /* Set styles for first part of logo */
+    .navbar-brand span:first-child {
+      color: #c56b85;
+    }
+
+    /* Set styles for second part of logo */
+    .navbar-brand span:last-child {
+      color: #345d7d;
+    }
+
+    @media (max-width: 992px) {
+      .header {
+        justify-content: center;
+      }
+
+      .navbar-brand {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      .navbar-nav.ms-auto.align-items-center {
+        justify-content: center;
+      }
+    }
+
+    /*footer*/
+    .footer {
+      padding-top: 30px;
+      background-color: #F6F0F4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .footer .copyright {
+      color: #725a7a;
+      font-weight: 400;
+      font-size: 0.7em;
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar-brand img {
+        width: 150px;
+        /* Decrease logo size */
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+        /* Stack nav items vertically */
+      }
+
+      .nav-item {
+        margin-top: 10px;
+        /* Add margin between nav items */
+      }
+
+      .form-control {
+        width: 100%;
+        /* Make search bar full width */
+      }
+    }
+
+    /* For screens larger than 576px */
+    @media (min-width: 576px) {
+      .navbar-brand img {
+        width: 200px;
+        /* Increase logo size */
+      }
+    }
+    .btn-hover {
+      width: 150px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+
+      margin-bottom: 30px;
+      height: 40px;
+      text-align: center;
+      border: none;
+      background-size: 300% 100%;
+
+      border-radius: 20px;
+      -o-transition: all .4s ease-in-out;
+      -webkit-transition: all .4s ease-in-out;
+      transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:hover {
+      background-position: 100% 0;
+      -o-transition: all .4s ease-in-out;
+      -webkit-transition: all .4s ease-in-out;
+      transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:focus {
+      outline: none;
+    }
+
+    .btn-hover.color-1 {
+      background-image: linear-gradient(to right, #345D7D, #F7D6E1, #695B7B, #C26A86);
+    }
+
+    #logout {
+      font-size: 0.9rem;
+      font-weight: 450px;
+      width: 90px;
+      text-align: center;
+      height: 30px;
+      padding: 1%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- for header part -->
+
+  <header class="header d-flex flex-wrap container-fluid">
+    <div class="navbar-brand-div">
+      <a class="navbar-brand" href="/"> <span>Design</span><span>ative</span> </a>
+    </div>
+
+    <div class="category-container">
+      <img src="../images/drop.png" width="50px" class="menuicn" />
+    </div>
+
+    <div class="right-header float-end">
+      <button type="button" class="btn text-white" id="logout" style="border-radius: 20px; font-weight: bold;"
+        onclick="window.location.href= '/logout';">
+        Log Out
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="main-container">
+      <!--LEFT NAV-->
+      <div class="navcontainer">
+        <nav class="nav">
+          <div class="nav-upper-options">
+            <div class="nav-option option1">
+              <h3>
+                <a href="/admin/" style="text-decoration: none; color: #F7D6E1">Dashboard</a>
+              </h3>
+            </div>
+
+            <div class="option2 nav-option">
+              <h3>
+                <a href="/admin/projects" style="text-decoration: none; color: #345D7D">Requests</a>
+              </h3>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!--CARDS-->
+      <div class="main">
+        <div class="box-container">
+          <div class="box box1">
+            <div class="text">
+              <h2 class="topic-heading">
+                <%= userCount %>
+              </h2>
+              <h2 class="topic">Registered Users</h2>
+            </div>
+            <img src="../images/user-add (2).png" alt="Views" />
+          </div>
+
+          <div class="box box2">
+            <div class="text">
+              <h2 class="topic-heading">
+                <%= projectCount %>
+              </h2>
+              <h2 class="topic">Uploaded Projects</h2>
+            </div>
+            <img src="../images/download.png" alt="published" />
+          </div>
+
+          <div class="box box3">
+            <div class="text">
+              <h2 class="topic-heading">
+                <%= reviewCount %>
+              </h2>
+              <h2 class="topic">Reviews</h2>
+            </div>
+            <img src="../images/comment.png" alt="comments" />
+          </div>
+        </div>
+        <form action="/admin/" method="get">
+
+          <div class="report-container">
+            <div class="report-header">
+              <h1 class="recent-Articles">Users Information</h1>
+              <!--Search box-->
+              <div class="searchBox-container">
+                <div class="searchBox">
+                  <button class="searchButton" href="#">
+                    <i class="material-icons">
+                      <ion-icon name="search-circle-outline" style="font-size: 30px"></ion-icon>
+                    </i>
+                  </button>
+                  <input class="searchInput" type="text" name="search" placeholder="Search" />
+                </div>
+              </div>
+            </div>
+        </form>
+
+        <!--DATA TABLE -->
+
+        <table id="dataTable">
+          <tr>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Email</th>
+            <th style="text-align: center">Uploaded Projects</th>
+            <th style="text-align: center">Reviews</th>
+            <th style="text-align: center">View Profile</th>
+            <th style="text-align: center">Delete</th>
+          </tr>
+          <% users.forEach(user=> { %>
+            <tr>
+              <td>
+                <%= user.firstname %>
+                  <%= user.lastname %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+              <td>
+                <%= user.numProjects %>
+              </td>
+              <td>
+                <%= user.numReviews %>
+              </td>
+              <td>
+                <center>
+                  <div id="viewbutton" role="button" onclick="window.location.href= '/user/<%= user._id %>';">
+                    view
+                  </div>
+                </center>
+              </td>
+              <td>
+                <center>
+                  <div id="deletebutton" role="button"
+                    onclick="window.location.href= '/admin/deleteAccount/<%= user._id %>';">
+                    Delete
+                  </div>
+                </center>
+              </td>
+            </tr>
+            <% }) %>
+        </table>
+      </div>
+    </div>
+    </div>
+  </main>
+
+  <script>
+    let menuicn = document.querySelector(".menuicn");
+    let nav = document.querySelector(".navcontainer");
+
+    menuicn.addEventListener("click", () => {
+      nav.classList.toggle("navclose");
+    });
+  </script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="text-center copyright">
+      <p>All rights reserved &copy; Designative Team @ 2023</p>
+    </div>
+  </footer>
+</body>
+
+</html>

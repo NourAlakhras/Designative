@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,
+				initial-scale=1.0" />
+  <title>Requests</title>
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/requestStyle.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    /* Main CSS Here */
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    :root {
+      --background-color1: #f6f0f4;
+      --background-color2: #f6f0f4;
+      /* --background-color3: #ededed;*/
+      --background-color4: #f6f0f4;
+      --primary-color: #4b49ac;
+      --secondary-color: #345d7d;
+      --Border-color: #725a7a;
+      --one-use-color: #725a7a;
+      --two-use-color: #725a7a;
+    }
+
+    body {
+      background-color: var(--background-color4);
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    header {
+      height: 70px;
+      width: 100vw;
+      padding: 0 30px;
+      background-color: var(--background-color1);
+      position: relative;
+      z-index: 100;
+      display: flex;
+      /* justify-content: space-between;
+        align-items: center;*/
+    }
+
+    .header .navbar-brand {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    /*HEADER*/
+
+    .icn {
+      height: 40px;
+    }
+
+    .menuicn {
+      cursor: pointer;
+    }
+
+    /*HEADER*/
+    .main-container {
+      display: flex;
+      width: 100vw;
+      position: relative;
+      top: 10px;
+      z-index: 1;
+    }
+
+    .main {
+      height: calc(100vh - 70px);
+      width: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 0px 30px 30px 30px;
+    }
+
+    .main::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(to bottom, rgb(0, 0, 85), rgb(0, 0, 50));
+    }
+
+    .main::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .main::-webkit-scrollbar-track {
+      background-color: #9e9e9eb2;
+    }
+
+    .box-container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 50px;
+    }
+
+    .nav {
+      min-height: 91vh;
+      width: 250px;
+      background-color: var(--background-color2);
+      position: absolute;
+      top: 0px;
+      left: 00;
+      box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 30px 0 20px 10px;
+    }
+
+    .navcontainer {
+      height: calc(100vh - 70px);
+      width: 250px;
+      position: relative;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .navcontainer::-webkit-scrollbar {
+      display: none;
+    }
+
+    .navclose {
+      width: 10px;
+    }
+
+    .nav-option {
+      width: 250px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px 0 20px;
+      gap: 20px;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .nav-option:hover {
+      border-left: 5px solid #c56b85;
+      background-color: #f7d6e1;
+      cursor: pointer;
+    }
+
+    .nav-upper-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .option1 {
+      border-left: 5px solid #725a7a;
+      background-color: var(--Border-color);
+      color: white;
+      cursor: pointer;
+    }
+
+    .option1:hover {
+      border-left: 5px solid #c56b85;
+      background-color: var(--Border-color);
+    }
+
+    .box {
+      height: 130px;
+      width: 230px;
+      border-radius: 20px;
+      box-shadow: 3px 3px 10px#C56B85;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .topic {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .topic-heading {
+      font-size: 30px;
+      letter-spacing: 3px;
+    }
+
+    .report-container {
+      width: 75%;
+      min-height: 300px;
+      max-width: 1200px;
+      margin: 70px auto 0px auto;
+      background-color: #f6f0f4;
+      border-radius: 30px;
+      box-shadow: 3px 3px 10px rgb(188, 188, 188);
+      padding: 0px 20px 20px 20px;
+    }
+
+    .report-header {
+      height: 80px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 10px 20px;
+      border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+    }
+
+    .recent-Articles {
+      font-size: 30px;
+      font-weight: 600;
+      color: #725a7a;
+    }
+
+    .view {
+      height: 35px;
+      width: 90px;
+      border-radius: 8px;
+      background-color: #725a7a;
+      color: white;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Responsive CSS Here */
+    @media screen and (max-width: 992px) {
+      .nav-img {
+        height: 25px;
+      }
+
+      .nav-option {
+        gap: 30px;
+      }
+
+      .nav-option h3 {
+        font-size: 15px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 800px;
+      }
+    }
+
+    @media screen and (max-width: 850px) {
+      .nav-img {
+        height: 30px;
+      }
+
+      .nav-option {
+        gap: 30px;
+      }
+
+      .nav-option h3 {
+        font-size: 20px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 700px;
+      }
+
+      .navcontainer {
+        width: 100vw;
+        position: absolute;
+        transition: all 0.6s ease-in-out;
+        top: 0;
+        left: -100vw;
+      }
+
+      .nav {
+        width: 100%;
+        position: absolute;
+      }
+
+      .navclose {
+        left: 00px;
+      }
+
+      .searchbar {
+        display: none;
+      }
+
+      .main {
+        padding: 40px 30px 30px 30px;
+      }
+    }
+
+    /**FOR HEADER**/
+    @media screen and (max-width: 490px) {
+      .message {
+        display: none;
+      }
+
+      .logosec {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .menuicn {
+        height: 25px;
+      }
+
+      .nav-img {
+        height: 25px;
+      }
+
+      .nav-option {
+        gap: 25px;
+      }
+
+      .nav-option h3 {
+        font-size: 12px;
+      }
+
+      .nav-upper-options {
+        gap: 15px;
+      }
+
+      .recent-Articles {
+        font-size: 20px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 550px;
+      }
+    }
+
+    /**For heDER**/
+
+    @media screen and (max-width: 400px) {
+      .recent-Articles {
+        font-size: 17px;
+      }
+
+      .view {
+        width: 60px;
+        font-size: 10px;
+        height: 27px;
+      }
+
+      .report-header {
+        height: 60px;
+        padding: 10px 10px 5px 10px;
+      }
+
+      .searchbtn img {
+        height: 20px;
+      }
+    }
+
+    @media screen and (max-width: 320px) {
+      .recent-Articles {
+        font-size: 12px;
+      }
+
+      .view {
+        width: 50px;
+        font-size: 8px;
+        height: 27px;
+      }
+
+      .report-header {
+        height: 60px;
+        padding: 10px 5px 5px 5px;
+      }
+
+      .t-op {
+        font-size: 12px;
+      }
+
+      .t-op-nextlvl {
+        font-size: 10px;
+      }
+
+      .report-topic-heading,
+      .item1,
+      .items {
+        width: 300px;
+      }
+
+      .report-body {
+        padding: 10px;
+      }
+
+      .label-tag {
+        width: 70px;
+      }
+
+      .searchbtn {
+        width: 40px;
+      }
+
+      .searchbar2 input {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- for header part -->
+  <header class="header d-flex flex-wrap container-fluid">
+    <div class="navbar-brand-div">
+      <a class="navbar-brand" href="/"> <span>Design</span><span>ative</span> </a>
+    </div>
+
+    <div class="category-container">
+      <img src="../images/drop.png" width="50px" class="menuicn" />
+    </div>
+
+    <div class="right-header float-end">
+      <button type="button" class="btn text-white" id="logout" style="border-radius: 20px"
+        onclick="window.location.href= '/logout';">
+        Log Out
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="main-container">
+      <!--LEFT NAV-->
+      <div class="navcontainer">
+        <nav class="nav">
+          <div class="nav-upper-options">
+            <div class="option2 nav-option">
+              <h3>
+                <a href="/admin/" style="text-decoration: none; color: #345d7d">Dashboard</a>
+              </h3>
+            </div>
+
+            <div class="nav-option option1">
+              <h3>
+                <a href="/admin/projects" style="text-decoration: none; color: #f7d6e1">Requests</a>
+              </h3>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="report-container">
+        <div class="report-header">
+          <h1 class="recent-Articles">Requests</h1>
+        </div>
+        <br />
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-grid">
+            <!-- Projects will be added here -->
+            <% pendingProjects.forEach(function(project, index) { %>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <!--carusal/img related to project-->
+                  <div class="col-12">
+                    <div id="id<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                      <div class="carousel-inner">
+                        <!--1st img-->
+                        <% project.images.forEach(image=> { %>
+                          <div class="carousel-item active">
+                            <img src="../uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
+                          </div>
+                          <% }) %>
+                            <!--2nd img-->
+                      </div>
+                      <!--the arrows for img to go back & forth-->
+                      <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body text-center">
+                    <h5 class="card-title">
+                      <%= project.name %>
+                    </h5>
+                    <h6>
+                      By: <%= project.userId.firstname %>
+                        <%= project.userId.lastname %>
+                    </h6>
+                    <div class="card-text project-description">
+                      <p class="hidden">
+                        <%= project.description %>
+                      </p>
+                    </div>
+                    <a href="#" class="read-more">Read more</a>
+                    <a href="#" class="read-less" style="display: none">Read less</a>
+                    <div class="btn-container">
+                      <a href="/admin/approveProject/<%= project._id %>" class="btn"
+                        style="background-color: #c56b85 !important; width: 100%;">Accept</a>
+                      <a href="/admin/rejectProject/<%= project._id %>" class="btn"
+                        style="background-color: #725a7a !important; width: 100%">Decline</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+                <!---x--->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let menuicn = document.querySelector(".menuicn");
+    let nav = document.querySelector(".navcontainer");
+
+    menuicn.addEventListener("click", () => {
+      nav.classList.toggle("navclose");
+    });
+  </script>
+  <script>
+    // Get all the cards
+    const cards = document.querySelectorAll(".card");
+
+    // Loop through all the cards
+    cards.forEach((card) => {
+      // Get the "Read more" button and "Read less" button for this card
+      const readMoreBtn = card.querySelector(".read-more");
+      const readLessBtn = card.querySelector(".read-less");
+
+      // Get the full description for this card
+      const fullDescription = card.querySelector(".project-description .hidden");
+
+      // Add a click event listener to the "Read more" button
+      readMoreBtn.addEventListener("click", function (e) {
+        // Prevent the default link behavior
+        e.preventDefault();
+
+        // Show the full description for this card
+        card.style.maxHeight = "none";
+        fullDescription.style.display = "block";
+
+        // Hide the "Read more" button and show the "Read less" button for this card
+        readMoreBtn.style.display = "none";
+        readLessBtn.style.display = "inline";
+      });
+
+      // Add a click event listener to the "Read less" button
+      readLessBtn.addEventListener("click", function (e) {
+        // Prevent the default link behavior
+        e.preventDefault();
+
+        // Hide the full description for this card
+        fullDescription.style.display = "none";
+
+        // Hide the "Read less" button and show the "Read more" button for this card
+        readLessBtn.style.display = "none";
+        readMoreBtn.style.display = "inline";
+
+        // Set the height of the card to 400px (or any other height you prefer)
+        card.style.maxHeight = "400px";
+      });
+    });
+  </script>
+</body>
+
+</html>
