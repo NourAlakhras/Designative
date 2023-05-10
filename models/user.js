@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Define a schema for your data model
+// Define a schema for the User model 
 const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    // validators right now arent doing anything
+
     minlength: [6, "Minimum password length is 6 characters"],
   },
   address: {

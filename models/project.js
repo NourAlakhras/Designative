@@ -1,6 +1,7 @@
+// Import the Mongoose library
 const mongoose = require("mongoose");
 
-// Define a schema for your data model
+// Define a schema for the Project model
 const projectSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
@@ -39,8 +40,9 @@ const projectSchema = new mongoose.Schema({
     default: "Pending",
   },
 });
-// Create a model from the schema
+
+// Create a model from the schema using the Mongoose model function
 const Project = mongoose.model("Project", projectSchema);
 
-// Export the model
+// Export the model so that it can be used in other parts of the application
 module.exports = Project;

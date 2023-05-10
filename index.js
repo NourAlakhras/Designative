@@ -1,41 +1,53 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const port = process.env.PORT || 5000;
-const session = require("express-session");
+// Import required modules
+const express = require("express"); // library for building web applications
+const mongoose = require("mongoose"); // library for MongoDB interactions
+const dotenv = require("dotenv"); // library to load environment variables
+const port = process.env.PORT || 5000; // Port to listen on
+const session = require("express-session"); // library for session handling
 
+// Library for storing session information in MongoDB
 const MongoDBStore = require("connect-mongodb-session")(session);
 
+// Import routers
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
 
+// Import middleware functions
 const upload = require("./uploadImages");
 const isAuth = require("./middleware/isAuth");
 const isAdmin = require("./middleware/isAdmin");
 
+// Import the User model
 const User = require("./models/user");
+
+// Create an Express app
 const app = express();
-// configuring the dotenv file
+
+// Load environment variables from the .env file
 dotenv.config();
 
-//register view engine
+// Set the view engine to EJS
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-//middleware
+// Serve static files from the 'public' folder
 app.use(express.static(__dirname + "/public"));
-// Add body-parser middleware to handle http requests
+
+// Parse request bodies using the 'urlencoded' method
 app.use(express.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+
+// Parse request bodies using the 'json' method
 app.use(express.json());
 
+// Create a new MongoDBStore instance for storing sessions
 const store = new MongoDBStore({
   uri: process.env.MONGO_URL,
   collection: "sessions",
 });
 
+// Use the session middleware to handle user sessions
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -44,13 +56,18 @@ app.use(
     store: store,
   }),
 );
+
+// Import the Notification model
 const Notification = require("./models/notification");
-// Notification.create({ message: "hello", userId: "645100368e32a6223e2c6e64" });
-//middleware to check is user is authenticated
+
+// Middleware function to check if user is authenticated and load their data
 app.use(async (req, res, next) => {
+  // Set 'isAuthenticated' to true if the user is logged in
   res.locals.isAuthenticated = req.session.isLoggedIn;
   if (req.session.user) {
+    // Load the user data from the database
     req.session.user = await User.findById(req.session.user._id);
+    // Set 'role', 'name', 'image', and 'notifications' for the views
     res.locals.role = req.session.user?.type;
     res.locals.name = req.session.user?.firstname + " " + req.session.user?.lastname;
     res.locals.image = req.session.user?.image;
@@ -60,11 +77,13 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// Mount routers
 app.use(authRouter);
 app.use(indexRouter);
 app.use(isAuth, userRouter);
 app.use("/admin", isAdmin, adminRouter);
 
+// Handle 404 errors
 app.use(function (req, res, next) {
   res.status(404);
   res.render("404", {
@@ -72,7 +91,7 @@ app.use(function (req, res, next) {
   });
 });
 
-//to connect to the db
+// Connect to the database and start the server
 const dbURL = process.env.MONGO_URL;
 mongoose.set("strictQuery", false);
 mongoose
