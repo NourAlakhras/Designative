@@ -120,8 +120,8 @@
                         <span id="label" style="font-size: 14px; font-weight: bold">Save Change</span>
                       </button>
                       <% } else { %>
-                        <a class="btn" href="mailto:<%= user.email %>"
-                          style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;">
+                        <a href="mailto:<%= user.email %>"
+                          style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;" class="btn" >
                           Contact</a>
                       <% } %>
                     </div>
@@ -381,7 +381,7 @@
                         <input type="textarea" name="description" class="simple-input" value="<%= project.description %>" />
                       </span>
                       <br/><br/>
-                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additional Informatio:
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additi:
                         <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
                       </label>
                       <br/><br/>

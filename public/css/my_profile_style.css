@@ -449,6 +449,13 @@ ul {
 }
 #imgprofile{
 	position:relative;
+	border: solid #345D7D;}
+	
+#imgprofile2{
+	position:relative;
+	border: solid #345D7D;
+	background-image: url(/images/customer.png);
+	background-size: cover;
 }
 
 /*Page Body*/
