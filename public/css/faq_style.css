@@ -62,7 +62,8 @@ p {
     color: #725a7a;
     font-size: 20px;
     font-weight: 550;
-    font-family: 'Ysabeau';;
+    font-family: 'Ysabeau';
+    ;
 }
 
 /* #345D7D blue
@@ -113,7 +114,8 @@ p {
 
 .navbar-collapse a:hover,
 .login:hover,
-.signup:hover, .navbar a.active:hover {
+.signup:hover,
+.navbar a.active:hover {
     color: #6c3c49 !important;
 }
 
@@ -122,8 +124,8 @@ p {
     border-radius: 20px !important;
     border: none !important;
     color: white !important;
-	padding:2%;
-	margin-top:16% !important; 
+    padding: 2%;
+	margin-top: 10%;
 }
 
 /* Set styles for signup and login  */
@@ -145,9 +147,7 @@ p {
     background-color: #c56b85;
     color: white;
 }
-.navbar a.active {
-	margin-top:0;
-}
+
 .navbar-toggler {
     font-size: 0.8rem;
     font-weight: 500;
@@ -190,6 +190,10 @@ p {
         border-radius: 20px;
         width: auto;
     }
+    .navbar a.active {
+        margin-top: 0 !important;
+    }
+
 }
 
 .footer {

@@ -45,7 +45,6 @@
     body {
       background-color: var(--background-color4);
       max-width: 100%;
-      overflow-x: hidden;
     }
 
     header {
@@ -84,7 +83,6 @@
       height: calc(100vh - 70px);
       width: 100%;
       overflow-y: scroll;
-      overflow-x: hidden;
       padding: 0px 30px 30px 30px;
     }
 
@@ -552,6 +550,11 @@
       color: #345d7d;
     }
 
+    #info {
+      width:100%;
+      border: red solid; 
+    }
+
     @media (max-width: 992px) {
       .header {
         justify-content: center;
@@ -561,6 +564,7 @@
         margin-right: 0;
         margin-bottom: 10px;
       }
+
       .navbar-nav.ms-auto.align-items-center {
         justify-content: center;
       }
@@ -611,6 +615,7 @@
         /* Increase logo size */
       }
     }
+
     .btn-hover {
       width: 150px;
       font-size: 18px;
@@ -652,6 +657,31 @@
       text-align: center;
       height: 30px;
       padding: 1%;
+    }
+
+    @media (min-width: 576px) and (max-width: 992px) {
+      #info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .box {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .text {
+        text-align: center;
+      }
+
+      .topic-heading {
+        font-size: 2rem;
+      }
+
+      table {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -728,70 +758,70 @@
             </div>
             <img src="../images/comment.png" alt="comments" />
           </div>
-        </div>
-        <form action="/admin/" method="get">
 
-          <div class="report-container">
-            <div class="report-header">
-              <h1 class="recent-Articles">Users Information</h1>
-              <!--Search box-->
-              <div class="searchBox-container">
-                <div class="searchBox">
-                  <button class="searchButton" href="#">
-                    <i class="material-icons">
-                      <ion-icon name="search-circle-outline" style="font-size: 30px"></ion-icon>
-                    </i>
-                  </button>
-                  <input class="searchInput" type="text" name="search" placeholder="Search" />
+          <form action="/admin/" method="get">
+            <div class="report-container" style=" width: 100%">
+              <div class="report-header">
+                <h1 class="recent-Articles">Users Information</h1>
+                <!--Search box-->
+                <div class="searchBox-container">
+                  <div class="searchBox">
+                    <button class="searchButton" href="#">
+                      <i class="material-icons">
+                        <ion-icon name="search-circle-outline" style="font-size: 30px"></ion-icon>
+                      </i>
+                    </button>
+                    <input class="searchInput" type="text" name="search" placeholder="Search" />
+                  </div>
                 </div>
               </div>
-            </div>
-        </form>
+          </form>
 
-        <!--DATA TABLE -->
+          <!--DATA TABLE -->
 
-        <table id="dataTable">
-          <tr>
-            <th style="text-align: center">Name</th>
-            <th style="text-align: center">Email</th>
-            <th style="text-align: center">Uploaded Projects</th>
-            <th style="text-align: center">Reviews</th>
-            <th style="text-align: center">View Profile</th>
-            <th style="text-align: center">Delete</th>
-          </tr>
-          <% users.forEach(user=> { %>
+          <table id="dataTable" style=" width:80%">
             <tr>
-              <td>
-                <%= user.firstname %>
-                  <%= user.lastname %>
-              </td>
-              <td>
-                <%= user.email %>
-              </td>
-              <td>
-                <%= user.numProjects %>
-              </td>
-              <td>
-                <%= user.numReviews %>
-              </td>
-              <td>
-                <center>
-                  <div id="viewbutton" role="button" onclick="window.location.href= '/user/<%= user._id %>';">
-                    view
-                  </div>
-                </center>
-              </td>
-              <td>
-                <center>
-                  <div id="deletebutton" role="button"
-                    onclick="window.location.href= '/admin/deleteAccount/<%= user._id %>';">
-                    Delete
-                  </div>
-                </center>
-              </td>
+              <th style="text-align: center">Name</th>
+              <th style="text-align: center">Email</th>
+              <th style="text-align: center">Uploaded Projects</th>
+              <th style="text-align: center">Reviews</th>
+              <th style="text-align: center">View Profile</th>
+              <th style="text-align: center">Delete</th>
             </tr>
-            <% }) %>
-        </table>
+            <% users.forEach(user=> { %>
+              <tr>
+                <td>
+                  <%= user.firstname %>
+                    <%= user.lastname %>
+                </td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <%= user.numProjects %>
+                </td>
+                <td>
+                  <%= user.numReviews %>
+                </td>
+                <td>
+                  <center>
+                    <div id="viewbutton" role="button" onclick="window.location.href= '/user/<%= user._id %>';">
+                      view
+                    </div>
+                  </center>
+                </td>
+                <td>
+                  <center>
+                    <div id="deletebutton" role="button"
+                      onclick="window.location.href= '/admin/deleteAccount/<%= user._id %>';">
+                      Delete
+                    </div>
+                  </center>
+                </td>
+              </tr>
+              <% }) %>
+          </table>
+        </div>
       </div>
     </div>
     </div>

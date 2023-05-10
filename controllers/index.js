@@ -42,12 +42,16 @@ exports.index = (req, res) => {
     });
   }
   // Otherwise, render homepage
-  res.render("homepage", { path: "/" });
+  res.render("homepage", {
+    path: "/"
+  });
 };
 
 // Exporting function to render contact us page
 exports.contactUs = (req, res) => {
-  res.render("contact_us", { path: "/contact" });
+  res.render("contact_us", {
+    path: "/contact"
+  });
 };
 
 // Exporting function to send email response
@@ -73,10 +77,14 @@ Designative team.`;
 
 // Exporting function to render FAQ page
 exports.FAQ = (req, res) => {
-  res.render("faq", { path: "/faq" });
+  res.render("faq", {
+    path: "/faq"
+  });
 };
 
 // Exporting function to render about us page
 exports.aboutUs = (req, res) => {
-  res.render("about_us", { path: "/about" });
+  res.render("about_us", {
+    path: "/about"
+  });
 };

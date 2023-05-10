@@ -120,9 +120,9 @@
                         <span id="label" style="font-size: 14px; font-weight: bold">Save Change</span>
                       </button>
                       <% } else { %>
-                        <a href="mailto:<%= user.email %>"
-                          style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;" class="btn" >
-                          Contact</a>
+                      <a href="mailto:<%= user.email %>"
+                        style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;" class="btn">
+                        Contact</a>
                       <% } %>
                     </div>
                 </form>
@@ -153,9 +153,10 @@
                         style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
                         Add Your Review </h2>
                       <div class="faq_box-wrapper">
-                        <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#345D7D;">
+                        <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#c56b85;">
                           <span class="input-group-addon"></span>
-                          <%= name %>
+                          <p style="color:#725A7A; font-size: 1.4em; padding-bottom:0; margin-bottom: 0;"><%= name %>
+                          </p>
                           <form action="/addReview" method="post">
                             <input type="hidden" name="toId" value="<%= user._id %>">
                             <div class="input-group">
@@ -372,19 +373,20 @@
                     <!--collect proj inf from user using a form-->
                     <form class="inputs-container" action="/updateProject" method="post">
                       <!--1st info: name of proj-->
-                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">ProjectName:
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Name:
                         <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
                       </label>
                       <br /><br />
                       <!--2nd info: description of proj-->
                       <span data-label="Project Description:" class="input" role="textbox" contenteditable>
-                        <input type="textarea" name="description" class="simple-input" value="<%= project.description %>" />
+                        <input type="textarea" name="description" class="simple-input"
+                          value="<%= project.description %>" />
                       </span>
-                      <br/><br/>
-                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additi:
-                        <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
+                      <br /><br />
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additional Information:
+                        <input type="text" name="name" class="simple-input" value="<%= project.additionalInfo %>" />
                       </label>
-                      <br/><br/>
+                      <br /><br />
                       <input type="hidden" name="id" value="<%= project._id %>">
                       <button class="btn" type="submit">
                         <a id="label" style="
