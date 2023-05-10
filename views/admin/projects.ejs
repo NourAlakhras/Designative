@@ -475,59 +475,64 @@
           <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-grid">
             <!-- Projects will be added here -->
             <% pendingProjects.forEach(function(project, index) { %>
-              <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                  <!--carusal/img related to project-->
-                  <div class="col-12">
-                    <div id="id<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                      <div class="carousel-inner">
-                        <!--1st img-->
-                        <% project.images.forEach(image=> { %>
-                          <div class="carousel-item active">
-                            <img src="../uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
-                          </div>
-                          <% }) %>
-                            <!--2nd img-->
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <!--carusal/img related to project-->
+                <div class="col-12">
+                  <div id="id<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                    <div class="carousel-inner">
+                      <!--1st img-->
+                      <% project.images.forEach(image=> { %>
+                      <div class="carousel-item active">
+                        <img src="../uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
                       </div>
-                      <!--the arrows for img to go back & forth-->
-                      <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
+                      <% }) %>
+                      <!--2nd img-->
                     </div>
+                    <!--the arrows for img to go back & forth-->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
                   </div>
-                  <div class="card-body text-center">
-                    <h5 class="card-title">
-                      <%= project.name %>
-                    </h5>
-                    <h6>
-                      By: <%= project.userId.firstname %>
-                        <%= project.userId.lastname %>
-                    </h6>
-                    <div class="card-text project-description">
-                      <p class="hidden">
-                        <%= project.description %>
-                      </p>
-                    </div>
-                    <a href="#" class="read-more">Read more</a>
-                    <a href="#" class="read-less" style="display: none">Read less</a>
-                    <div class="btn-container">
-                      <a href="/admin/approveProject/<%= project._id %>" class="btn"
-                        style="background-color: #c56b85 !important; width: 100%;">Accept</a>
-                      <a href="/admin/rejectProject/<%= project._id %>" class="btn"
-                        style="background-color: #725a7a !important; width: 100%">Decline</a>
-                    </div>
+                </div>
+                <div class="card-body text-center">
+                  <h5 class="card-title">
+                    <%= project.name %>
+                  </h5>
+                  <h6>
+                    By: <%= project.userId.firstname %>
+                    <%= project.userId.lastname %>
+                  </h6>
+                  <div class="card-text project-description">
+                    <p class="hidden">
+                      <%= project.description %>
+                    </p>
+                  </div>
+                  <div class="card-text project-description">
+                    <p class="hidden" style="color:#6c3c49; font-size:1.1em; font-weight:400;">
+                      <%= project.additionalInfo %>
+                    </p>
+                  </div>
+                  <a href="#" class="read-more">Read more</a>
+                  <a href="#" class="read-less" style="display: none">Read less</a>
+                  <div class="btn-container">
+                    <a href="/admin/approveProject/<%= project._id %>" class="btn"
+                      style="background-color: #c56b85 !important; width: 100%;">Accept</a>
+                    <a href="/admin/rejectProject/<%= project._id %>" class="btn"
+                      style="background-color: #725a7a !important; width: 100%">Decline</a>
                   </div>
                 </div>
               </div>
-              <% }) %>
-                <!---x--->
+            </div>
+            <% }) %>
+            <!---x--->
           </div>
         </div>
       </div>

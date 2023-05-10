@@ -19,21 +19,6 @@
     <link rel="stylesheet" href="/css/category_style.css">
     <link href='https://fonts.googleapis.com/css?family=Ysabeau' rel='stylesheet'>
     <style>
-        .pagination {
-            padding-top: 3%;
-        }
-
-        .page-link {
-            background-color: #C56B85;
-            color: white;
-            font-family: Ysabeau;
-            font-size: 1.25rem;
-        }
-
-        .page-link:hover {
-            color: #6c3c49 !important;
-        }
-
         .read-more,
         .read-less {
             margin-bottom: 2%;
@@ -43,136 +28,133 @@
 
 <body>
     <%- include('partials/nav-bar-auth.ejs') %>
-        <script>
-            document.querySelector('.mini-photo-wrapper').addEventListener('click', function () {
-                document.querySelector('.menu-container').classList.toggle('active');
-            });
-        </script>
-        <main>
-            <div class="container">
-                <h1 class="text-center">
-                    <%= category %> Projects
-                </h1>
-                <center>
-                    <hr style="width:80%; border: 2px solid #C56B85;border-radius: 5px; margin-bottom:50px;">
-                </center>
-                <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-grid">
-                    <!-- Projects will be added here -->
+    <script>
+        document.querySelector('.mini-photo-wrapper').addEventListener('click', function () {
+            document.querySelector('.menu-container').classList.toggle('active');
+        });
+    </script>
+    <main>
+        <div class="container">
+            <h1 class="text-center">
+                <%= category %> Projects
+            </h1>
+            <center>
+                <hr style="width:80%; border: 2px solid #C56B85;border-radius: 5px; margin-bottom:50px;">
+            </center>
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-grid">
+                <!-- Projects will be added here -->
 
-                    <% projects.forEach(function(project, index) { %>
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <!--carusal/img related to project-->
-                                <div class="col-12">
-                                    <div id="id<%= index %>" class="carousel slide" data-bs-touch="false"
-                                        data-bs-interval="false">
-                                        <div class="carousel-inner">
-                                            <!--1st img-->
-                                            <% project.images.forEach(image=> { %>
-                                                <div class="carousel-item active">
-                                                    <img src="/uploads/<%= image %>" class="d-block w-100" alt="img1"
-                                                        height="200px;">
-                                                </div>
-                                                <% }) %>
-                                        </div>
-                                        <!--the arrows for img to go back & forth-->
-                                        <button class="carousel-control-prev" type="button"
-                                            data-bs-target="#id<%= index %>" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                            data-bs-target="#id<%= index %>" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                <% projects.forEach(function(project, index) { %>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <!--carusal/img related to project-->
+                        <div class="col-12">
+                            <div id="id<%= index %>" class="carousel slide" data-bs-touch="false"
+                                data-bs-interval="false">
+                                <div class="carousel-inner">
+                                    <!--1st img-->
+                                    <% project.images.forEach(image=> { %>
+                                    <div class="carousel-item active">
+                                        <img src="/uploads/<%= image %>" class="d-block w-100" alt="img1"
+                                            height="200px;">
                                     </div>
+                                    <% }) %>
                                 </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">
-                                        <%= project.name %>
-                                    </h5>
-                                    <div class="card-text project-description">
-                                        <p class="hidden">
-                                            <%= project.description %>
-                                        </p>
-                                    </div>
-                                    <a href="#" class="read-more">Read more</a>
-                                    <a href="#" class="read-less" style="display: none;">Read less</a>
-                                    <a href="/user/<%= project.userId._id %>" class="btn ">View Designer Profile</a>
-                                </div>
+                                <!--the arrows for img to go back & forth-->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
-
-                        <% }) %>
-
-                            <!-- Add more project cards here as needed -->
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <%= project.name %>
+                            </h5>
+                            <div class="card-text project-description">
+                                <p class="hidden">
+                                    <%= project.description %>
+                                </p>
+                            </div>
+                            <div class="card-text project-description">
+                                <p class="hidden" style="color:#6c3c49; font-size:1.1em; font-weight:400;">
+                                    <%= project.additionalInfo %>
+                                </p>
+                            </div>
+                            <a href="#" class="read-more">Read more</a>
+                            <a href="#" class="read-less" style="display: none;">Read less</a>
+                            <a href="/user/<%= project.userId._id %>" class="btn ">View Designer Profile</a>
+                        </div>
+                    </div>
                 </div>
-                <!---Paginatiion--->
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
+
+                <% }) %>
+
+                <!-- Add more project cards here as needed -->
             </div>
-            </div>
-        </main>
-        <!--Footer & nav-->
-        <%- include('partials/footer.ejs') %>
-            <script>
-                function provideName() {
-                    // alert("This will Appear\nBefore any Contents" );
-                    var name = window.prompt("Enter Your Name");
-                    // the elemet you are refering to must exist before this embeded script
-                    document.getElementById("welcoming").innerHTML = "Welcome " + name + "!";
-                }
-            </script>
-            <script>
-                // Get all the cards
-                const cards = document.querySelectorAll('.card');
+        </div>
+        </div>
+    </main>
+    <!--Footer & nav-->
+    <%- include('partials/footer.ejs') %>
+    <script>
+        function provideName() {
+            // alert("This will Appear\nBefore any Contents" );
+            var name = window.prompt("Enter Your Name");
+            // the elemet you are refering to must exist before this embeded script
+            document.getElementById("welcoming").innerHTML = "Welcome " + name + "!";
+        }
+    </script>
+    <script>
+        // Get all the cards
+        const cards = document.querySelectorAll('.card');
 
-                // Loop through all the cards
-                cards.forEach(card => {
-                    // Get the "Read more" button and "Read less" button for this card
-                    const readMoreBtn = card.querySelector('.read-more');
-                    const readLessBtn = card.querySelector('.read-less');
+        // Loop through all the cards
+        cards.forEach(card => {
+            // Get the "Read more" button and "Read less" button for this card
+            const readMoreBtn = card.querySelector('.read-more');
+            const readLessBtn = card.querySelector('.read-less');
 
-                    // Get the full description for this card
-                    const fullDescription = card.querySelector('.project-description .hidden');
+            // Get the full description for this card
+            const fullDescription = card.querySelector('.project-description .hidden');
 
-                    // Add a click event listener to the "Read more" button
-                    readMoreBtn.addEventListener('click', function (e) {
-                        // Prevent the default link behavior
-                        e.preventDefault();
+            // Add a click event listener to the "Read more" button
+            readMoreBtn.addEventListener('click', function (e) {
+                // Prevent the default link behavior
+                e.preventDefault();
 
-                        // Show the full description for this card
-                        card.style.maxHeight = 'none';
-                        fullDescription.style.display = 'block';
+                // Show the full description for this card
+                card.style.maxHeight = 'none';
+                fullDescription.style.display = 'block';
 
-                        // Hide the "Read more" button and show the "Read less" button for this card
-                        readMoreBtn.style.display = 'none';
-                        readLessBtn.style.display = 'inline';
-                    });
+                // Hide the "Read more" button and show the "Read less" button for this card
+                readMoreBtn.style.display = 'none';
+                readLessBtn.style.display = 'inline';
+            });
 
-                    // Add a click event listener to the "Read less" button
-                    readLessBtn.addEventListener('click', function (e) {
-                        // Prevent the default link behavior
-                        e.preventDefault();
+            // Add a click event listener to the "Read less" button
+            readLessBtn.addEventListener('click', function (e) {
+                // Prevent the default link behavior
+                e.preventDefault();
 
-                        // Hide the full description for this card
-                        fullDescription.style.display = 'none';
+                // Hide the full description for this card
+                fullDescription.style.display = 'none';
 
-                        // Hide the "Read less" button and show the "Read more" button for this card
-                        readLessBtn.style.display = 'none';
-                        readMoreBtn.style.display = 'inline';
+                // Hide the "Read less" button and show the "Read more" button for this card
+                readLessBtn.style.display = 'none';
+                readMoreBtn.style.display = 'inline';
 
-                        // Set the height of the card to 400px (or any other height you prefer)
-                        card.style.maxHeight = '400px';
-                    });
-                });
-            </script>
+                // Set the height of the card to 400px (or any other height you prefer)
+                card.style.maxHeight = '400px';
+            });
+        });
+    </script>
 
 
 </body>

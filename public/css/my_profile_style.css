@@ -336,6 +336,13 @@ ul {
   }
 }
 
+.simple-input {
+	width: 100%;
+	height: auto;
+	white-space: normal;
+	overflow: scroll;
+  }
+
 /* For screens larger than 576px */
 @media (min-width: 576px) {
   .navbar-brand img {

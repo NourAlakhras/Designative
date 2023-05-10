@@ -16,725 +16,730 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet" />
   <% if(error){ %>
-    <%- error %>
-      <% } %>
-        <style>
-          body {
-            overflow-x: hidden;
-            background: #f6f0f4 !important;
-          }
+  <%- error %>
+  <% } %>
+  <style>
+    body {
+      overflow-x: hidden;
+      background: #f6f0f4 !important;
+    }
 
-          .btn {
-            background-color: #c56b85;
-            font-family: "Ysabeau";
-          }
+    .btn {
+      background-color: #c56b85;
+      font-family: "Ysabeau";
+    }
 
-          .btn:hover {
-            background: #345d7d;
-          }
+    .btn:hover {
+      background: #345d7d;
+    }
 
-          #label {
-            color: white;
-            font-weight: bold;
-          }
+    #label {
+      color: white;
+      font-weight: bold;
+    }
 
-          .pointer {
-            cursor: pointer;
-          }
+    .pointer {
+      cursor: pointer;
+    }
 
-          .accordian-link h3 {
-            font-size: 3.5em;
-          }
+    .accordian-link h3 {
+      font-size: 3.5em;
+    }
 
-          .review_answer {
-            max-height: 10em;
-            overflow-y: auto;
-          }
+    .review_answer {
+      max-height: 10em;
+      overflow-y: auto;
+    }
 
-          .review_answer::-webkit-scrollbar {
-            width: 1.5em;
-          }
+    .review_answer::-webkit-scrollbar {
+      width: 1.5em;
+    }
 
-          .review_answer::-webkit-scrollbar-track {
-            border-radius: 8px;
-          }
+    .review_answer::-webkit-scrollbar-track {
+      border-radius: 8px;
+    }
 
-          .review_answer::-webkit-scrollbar-thumb {
-            border-radius: 8px;
-          }
+    .review_answer::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+    }
 
-          #review-username input:hover {
-            background: #F6F0F4;
-            color: #345D7D;
-          }
-        </style>
+    #review-username input:hover {
+      background: #F6F0F4;
+      color: #345D7D;
+    }
+  </style>
 </head>
 
 <body>
   <%- include('partials/nav-bar-auth.ejs') %>
-    <!--profile menu to open & close-->
-    <script>
-      document
-        .querySelector(".mini-photo-wrapper")
-        .addEventListener("click", function () {
-          document.querySelector(".menu-container").classList.toggle("active");
-        });
-    </script>
+  <!--profile menu to open & close-->
+  <script>
+    document
+      .querySelector(".mini-photo-wrapper")
+      .addEventListener("click", function () {
+        document.querySelector(".menu-container").classList.toggle("active");
+      });
+  </script>
 
-    <main style="font-size: 12px">
-      <!--Page content-->
-      <div class="container">
-        <div class="main-body">
-          <div class="row">
-            <!--1st col from page-->
-            <div class="col-md-4">
-              <!--1st row-->
-              <div class="card">
-                <div class="card-body">
-                  <!--general info-->
-                  <form action="/updateAccount" method="post" enctype="multipart/form-data">
-                    <div class="d-flex flex-column align-items-center text-center">
-                      <div class="profile">
-                        <% if (!guest) { %>
-                          <label class="-label" for="fileprofile">
-                            <ion-icon name="camera"></ion-icon>
-                            <span>Change Image</span>
-                          </label>
-                          <input name="image" id="fileprofile" type="file" style="display: none" />
-                          <% } %>
-                            <% if(user.image) {%>
-                              <img id="imgprofile" src="/uploads/<%= user.image %>" alt="Admin" class="rounded-circle p-1"
-                                width="110" />
-                              <% } else { %>
-                                <img id="imgprofile" src="/images/customer.png" alt="Admin" class="rounded-circle p-1" 
-                                  width="110" />
-                                <% } %>
-                      </div>
-                      <div class="mt-3">
-                        <h4 style="font-weight: 700;">
-                          <%= user.firstname %>
-                            <%= user.lastname %>
-                        </h4>
-                        <% if (!guest) { %>
-                          <button class="btn" type="submit">
-                            <span id="label" style="font-size: 14px; font-weight: bold">Save Change</span>
-                          </button>
-                          <% } else { %>
-                            <button class="btn">
-                              <a href="mailto:<%= user.email %>"
-                                style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;">
-                                Contact</a>
-                            </button>
-                            <% } %>
-                      </div>
-                  </form>
-                </div>
-                <script>
-                  //to allow the user choose the profile image
-                  const image = document.getElementById("img"),
-                    input = document.getElementById("fileprofile");
-
-                  input.addEventListener("change", () => {
-                    image.src = URL.createObjectURL(input.files[0]);
-                  });
-                </script>
-              </div>
-            </div>
-
-            <!--2nd row-->
+  <main style="font-size: 12px">
+    <!--Page content-->
+    <div class="container">
+      <div class="main-body">
+        <div class="row">
+          <!--1st col from page-->
+          <div class="col-md-4">
+            <!--1st row-->
             <div class="card">
-              <!--form to add review-->
-              <% if (guest) { %>
-
-                <div class="card-body">
-                  <section class="faq_dynamic-main">
-                    <div class="container">
-                      <div class="listing__faq py-4">
-                        <div class="faq_inner-listing">
-                          <h2 class="secondary-color py-2 f-24"
-                            style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
-                            Add Your Review </h2>
-                          <div class="faq_box-wrapper">
-                            <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#345D7D;">
-                              <span class="input-group-addon"></span>
-                              <%= name %>
-                                <form action="/addReview" method="post">
-                                  <input type="hidden" name="toId" value="<%= user._id %>">
-                                  <div class="input-group">
-                                    <textarea name="message" aria-label="With textarea" rows="4" cols="50"
-                                      id="rewiew_message" placeholder="Message"
-                                      class="form-control mt-3 w-100 rounded-0" style="font-size:1.0em;"
-                                      required></textarea>
-                                  </div>
-                                  <div class="list_add-faq pt-4">
-                                    <div class="input-group align-items-center">
-                                      <button type="submit" role="button" class="list_add-review-cta p-2 rounded"
-                                        style="background:#C56B85; ">
-                                        <h3 class="text-white f-16 fw-semibold m-0 align-items-center"
-                                          style="background:#C56B85; font-size:1.5em; font-weight:700">
-                                          <ion-icon name="add" class="pe-2 f-20 align-items-center bold"></ion-icon>Add
-                                          Another
-                                        </h3>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+              <div class="card-body">
+                <!--general info-->
+                <form action="/updateAccount" method="post" enctype="multipart/form-data">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <div class="profile">
+                      <% if (!guest) { %>
+                      <label class="-label" for="fileprofile">
+                        <ion-icon name="camera"></ion-icon>
+                        <span>Change Image</span>
+                      </label>
+                      <input name="image" id="fileprofile" type="file" style="display: none" />
+                      <% } %>
+                      <% if(user.image) {%>
+                      <img id="imgprofile" src="/uploads/<%= user.image %>" alt="Admin" class="rounded-circle p-1"
+                        width="110" />
+                      <% } else { %>
+                      <img id="imgprofile" src="/images/customer.png" alt="Admin" class="rounded-circle p-1"
+                        width="110" />
+                      <% } %>
                     </div>
-                  </section>
-                </div>
-                <% } %>
-
-                  <!--view others review-->
-                  <section class="content-wrapper-faq py-5">
-                    <div class="container">
-                      <h2 class="secondary-color py-2 f-24"
-                        style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
-                        See What Others Say </h2>
-                      <!--toggle to see more/less for reviews-->
-                      <button type="button" class="btn" id="more" value="View More" data-bs-toggle="collapse"
-                        data-bs-target="#demo" onclick="read()" style="color:white; font-weight:700; font-size:1.2em;">
-                        View More
+                    <div class="mt-3">
+                      <h4 style="font-weight: 700;">
+                        <%= user.firstname %>
+                        <%= user.lastname %>
+                      </h4>
+                      <% if (!guest) { %>
+                      <button class="btn" type="submit">
+                        <span id="label" style="font-size: 14px; font-weight: bold">Save Change</span>
                       </button>
-                      <div id="demo" class="collapse">
-                        <div class="main_reviews-container">
-
-                          <% if (reviews.length> 0) { %>
-                            <% reviews.forEach(review=> { %>
-                              <!--1st review example-->
-                              <div class="border py-3 my-2 border-2 rounded reviews_inner container">
-                                <div class="accordian-link d-flex align-items-center pointer py-2">
-                                  <h3 class="reveiew_user_name ps-3"
-                                    style="color:#C56B85; text-align:left; font-size:1.9em;">
-                                    <%= review.userId.firstname %>
-                                      <%= review.userId.lastname %>
-                                  </h3>
-                                </div>
-                                <p class="review_answer" style="color:#345D7D; text-align:left; font-size:14px;">
-                                  <%= review.message %>
-                                </p>
-                              </div>
-                              <% }) %>
-                                <% } %>
-
-                        </div>
-                      </div>
+                      <% } else { %>
+                      <button class="btn">
+                        <a href="mailto:<%= user.email %>"
+                          style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;">
+                          Contact</a>
+                      </button>
+                      <% } %>
                     </div>
-                  </section>
+                </form>
+              </div>
+              <script>
+                //to allow the user choose the profile image
+                const image = document.getElementById("img"),
+                  input = document.getElementById("fileprofile");
+
+                input.addEventListener("change", () => {
+                  image.src = URL.createObjectURL(input.files[0]);
+                });
+              </script>
             </div>
           </div>
 
+          <!--2nd row-->
+          <div class="card">
+            <!--form to add review-->
+            <% if (guest) { %>
 
-          <!--2nd col of page-->
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-body">
-                <form action="/updateAccount" method="post">
-                  <!--form info: 1st row-->
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">First Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input name="firstname" type="text" class="form-control" value="<%= user.firstname %>"
-                        style="font-size: medium" <%=hide %> />
+            <div class="card-body">
+              <section class="faq_dynamic-main">
+                <div class="container">
+                  <div class="listing__faq py-4">
+                    <div class="faq_inner-listing">
+                      <h2 class="secondary-color py-2 f-24"
+                        style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
+                        Add Your Review </h2>
+                      <div class="faq_box-wrapper">
+                        <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#345D7D;">
+                          <span class="input-group-addon"></span>
+                          <%= name %>
+                          <form action="/addReview" method="post">
+                            <input type="hidden" name="toId" value="<%= user._id %>">
+                            <div class="input-group">
+                              <textarea name="message" aria-label="With textarea" rows="4" cols="50" id="rewiew_message"
+                                placeholder="Message" class="form-control mt-3 w-100 rounded-0" style="font-size:1.0em;"
+                                required></textarea>
+                            </div>
+                            <div class="list_add-faq pt-4">
+                              <div class="input-group align-items-center">
+                                <button type="submit" role="button" class="list_add-review-cta p-2 rounded"
+                                  style="background:#C56B85; ">
+                                  <h3 class="text-white f-16 fw-semibold m-0 align-items-center"
+                                    style="background:#C56B85; font-size:1.5em; font-weight:700">
+                                    <ion-icon name="add" class="pe-2 f-20 align-items-center bold"></ion-icon>Add
+                                    Another
+                                  </h3>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Last Name</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input name="lastname" type="text" class="form-control" value="<%= user.lastname %>"
-                        style="font-size: medium" <%=hide %> />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input name="email" type="text" class="form-control" value="<%= user.email %>"
-                        style="font-size: medium" <%=hide %> />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input name="phoneNumber" type="text" class="form-control" value="<%= user.phoneNumber %>"
-                        style="font-size: medium" <%=hide %> />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <input name="address" type="text" class="form-control" value="<%= user.address %>"
-                        style="font-size: medium" <%=hide %> />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9 text-secondary">
-                      <% if (!guest) { %>
-                        <button class="btn" type="submit">
-                          <span id="label" style="font-size: 14px; font-weight: bold">Save Changes</span>
-                        </button>
-                        <% } %>
-                </form>
-              </div>
+                </div>
+              </section>
             </div>
+            <% } %>
+
+            <!--view others review-->
+            <section class="content-wrapper-faq py-5">
+              <div class="container">
+                <h2 class="secondary-color py-2 f-24"
+                  style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
+                  See What Others Say </h2>
+                <!--toggle to see more/less for reviews-->
+                <button type="button" class="btn" id="more" value="View More" data-bs-toggle="collapse"
+                  data-bs-target="#demo" onclick="read()" style="color:white; font-weight:700; font-size:1.2em;">
+                  View More
+                </button>
+                <div id="demo" class="collapse">
+                  <div class="main_reviews-container">
+
+                    <% if (reviews.length> 0) { %>
+                    <% reviews.forEach(review=> { %>
+                    <!--1st review example-->
+                    <div class="border py-3 my-2 border-2 rounded reviews_inner container">
+                      <div class="accordian-link d-flex align-items-center pointer py-2">
+                        <h3 class="reveiew_user_name ps-3" style="color:#C56B85; text-align:left; font-size:1.9em;">
+                          <%= review.userId.firstname %>
+                          <%= review.userId.lastname %>
+                        </h3>
+                      </div>
+                      <p class="review_answer" style="color:#345D7D; text-align:left; font-size:14px;">
+                        <%= review.message %>
+                      </p>
+                    </div>
+                    <% }) %>
+                    <% } %>
+
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
 
-        <!--project status: 2nd row-->
 
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="cards">
-              <!--1st project example-->
-              <% projects.forEach(function(project, index) { %>
-
-                <div class="card twitter" id="<%= index %>">
-                  <!--1st row to add project name & description-->
-                  <div class="row">
-                    <h2 class="card-title-large">
-                      <%= project.name %>
-                    </h2>
-                    <!--project name & desc & edit button-->
-                    <div class="col-sm-6">
-                      <p style="font-size: 17px; text-align: left; font-weight: 700" class="card-description text-dark">
-                        <%= project.description %>
-                      </p>
-                      <% if (!guest) { %>
-                        <a class="card-cta" role="button"
-                          href="javascript:SwapDivsWithClick('<%= index %>','edit<%= index %>')">Edit</a>
-                        <a class="card-cta" role="button" onclick="removeTwit('<%= project._id %>')">Delete</a>
-                        <% } %>
-
-                          <!--to allow edit project when user click on edit button-->
-                          <script>
-                            function SwapDivsWithClick(div1, div2) {
-                              d1 = document.getElementById(div1);
-                              d2 = document.getElementById(div2);
-                              if (d2.style.display == "none") {
-                                d1.style.display = "none";
-                                d2.style.display = "block";
-                              } else {
-                                d1.style.display = "block";
-                                d2.style.display = "none";
-                              }
-                            }
-                          </script>
-                    </div>
-
-                    <!--carusal/img related to project-->
-                    <div class="col-sm-6">
-                      <div id="id<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                        <div class="carousel-inner">
-                          <!--1st img-->
-                          <% project.images.forEach(image=> { %>
-                            <div class="carousel-item active">
-                              <img src="/uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
-                            </div>
-                            <% }) %>
-                        </div>
-                        <!--the arrows for img to go back & forth-->
-                        <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
-                          data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
-                          data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
-                    </div>
+        <!--2nd col of page-->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <form action="/updateAccount" method="post">
+                <!--form info: 1st row-->
+                <div class="row mb-3">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">First Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="firstname" type="text" class="form-control" value="<%= user.firstname %>"
+                      style="font-size: medium" <%=hide %> />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Last Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="lastname" type="text" class="form-control" value="<%= user.lastname %>"
+                      style="font-size: medium" <%=hide %> />
                   </div>
                 </div>
 
-                <!--Edit option for project EX#1-->
-                <div id="edit<%= index %>" class="card twitter" style="display: none">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="listing-container">
-                        <!--collect proj inf from user using a form-->
-                        <form class="inputs-container" action="/updateProject" method="post">
-                          <!--1st info: name of proj-->
-                          <label style="color: #c56b85; font-size: 15px; font-weight: 400">ProjectName:
-                            <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
-                          </label>
-                          <br /><br />
-                          <!--2nd info: description of proj-->
-                          <span data-label="Project Description:" class="input" role="textbox" contenteditable>
-                            <input type="text" name="description" class="simple-input"
-                              value="<%= project.description %>" />
-                          </span>
-                          <br /><br />
-                          <input type="hidden" name="id" value="<%= project._id %>">
-                          <button class="btn" type="submit">
-                            <a id="label" style="
+                <div class="row mb-3">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="email" type="text" class="form-control" value="<%= user.email %>"
+                      style="font-size: medium" <%=hide %> />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Phone</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="phoneNumber" type="text" class="form-control" value="<%= user.phoneNumber %>"
+                      style="font-size: medium" <%=hide %> />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Address</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <input name="address" type="text" class="form-control" value="<%= user.address %>"
+                      style="font-size: medium" <%=hide %> />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-9 text-secondary">
+                    <% if (!guest) { %>
+                    <button class="btn" type="submit">
+                      <span id="label" style="font-size: 14px; font-weight: bold">Save Changes</span>
+                    </button>
+                    <% } %>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--project status: 2nd row-->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="cards">
+            <!--1st project example-->
+            <% projects.forEach(function(project, index) { %>
+
+            <div class="card twitter" id="<%= index %>">
+              <!--1st row to add project name & description-->
+              <div class="row">
+                <h2 class="card-title-large">
+                  <%= project.name %>
+                </h2>
+                <!--project name & desc & edit button-->
+                <div class="col-sm-6">
+                  <p style="font-size: 17px; text-align: left; font-weight: 700" class="card-description text-dark">
+                    <%= project.description %>
+                  </p>
+                  <p style="color:#6c3c49; font-size:1.1em; font-weight:400;" class="card-description text-dark">
+                    <%= project.additionalInfo %>
+                  </p>
+                  <% if (!guest) { %>
+                  <a class="card-cta" role="button"
+                    href="javascript:SwapDivsWithClick('<%= index %>','edit<%= index %>')">Edit</a>
+                  <a class="card-cta" role="button" onclick="removeTwit('<%= project._id %>')">Delete</a>
+                  <% } %>
+
+                  <!--to allow edit project when user click on edit button-->
+                  <script>
+                    function SwapDivsWithClick(div1, div2) {
+                      d1 = document.getElementById(div1);
+                      d2 = document.getElementById(div2);
+                      if (d2.style.display == "none") {
+                        d1.style.display = "none";
+                        d2.style.display = "block";
+                      } else {
+                        d1.style.display = "block";
+                        d2.style.display = "none";
+                      }
+                    }
+                  </script>
+                </div>
+
+                <!--carusal/img related to project-->
+                <div class="col-sm-6">
+                  <div id="id<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                    <div class="carousel-inner">
+                      <!--1st img-->
+                      <% project.images.forEach(image=> { %>
+                      <div class="carousel-item active">
+                        <img src="/uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
+                      </div>
+                      <% }) %>
+                    </div>
+                    <!--the arrows for img to go back & forth-->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#id<%= index %>"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#id<%= index %>"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Edit option for project EX#1-->
+            <div id="edit<%= index %>" class="card twitter" style="display: none">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="listing-container">
+                    <!--collect proj inf from user using a form-->
+                    <form class="inputs-container" action="/updateProject" method="post">
+                      <!--1st info: name of proj-->
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Name:
+                        <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
+                      </label>
+                      <br /><br />
+                      <!--2nd info: description of proj-->
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Description:
+                        <input type="text" name="name" class="simple-input" value="<%= project.description %>" />
+                      </label>
+
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additional Information:
+                        <input type="text" name="name" class="simple-input" value="<%= project.additionalInfo %>" 
+                        style="color:#6c3c49; font-size:1.1em; font-weight:400;"/>
+                      </label>
+                      <br/><br/>
+                      <input type="hidden" name="id" value="<%= project._id %>">
+                      <button class="btn" type="submit">
+                        <a id="label" style="
                                 font-size: 14px;
                                 font-weight: bold;
                                 text-decoration: none;
                               " href="javascript:SwapDivsWithClick('swapper-first','swapper-other')">
-                              Update Project
-                            </a>
-                          </button>
+                          Update Project
+                        </a>
+                      </button>
 
-                        </form>
-                      </div>
-                    </div>
-
-                    <!--2nd row: project img to fill-->
-                    <div class="col-sm-6">
-                      <!--4th info: img for proj using carousal-->
-                      <span data-label="Image for your project:" style="color: #c56b85">
-                        <div id="ed1" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                          <div class="carousel-inner">
-                            <!--1st img-->
-                            <div class="carousel-item active">
-                              <div class="profile-pic">
-                                <label class="-label" for="fileTwit1">
-                                  <ion-icon name="camera"></ion-icon>
-                                  <span>Change Image</span>
-                                </label>
-                                <img src="/images/p1.png" id="twit1" width="100%" height="200" />
-                                <input id="fileTwit1" type="file" onchange="loadtwit1(event)" style="display: none" />
-                              </div>
-                            </div>
-
-                            <!--to allow the user choose the image1-->
-                            <script>
-                              const loadtwit1 = function (event) {
-                                const imagetwit1 = document.getElementById("twit1");
-                                imagetwit1.src = URL.createObjectURL(
-                                  event.target.files[0],
-                                );
-                              };
-                            </script>
-
-                            <!--2nd img-->
-                            <div class="carousel-item">
-                              <div class="profile-pic">
-                                <label class="-label" for="fileTwit2">
-                                  <ion-icon name="camera"></ion-icon>
-                                  <span>Change Image</span>
-                                </label>
-                                <img src="/images/p2.png" id="twit2" width="100%" height="200" />
-                                <input id="fileTwit2" type="file" onchange="loadtwit2(event)" style="display: none" />
-                              </div>
-                            </div>
-
-                            <!--to allow the user choose the image1-->
-                            <script>
-                              const loadtwit2 = function (event) {
-                                const imagetwit2 = document.getElementById("twit2");
-                                imagetwit2.src = URL.createObjectURL(
-                                  event.target.files[0],
-                                );
-                              };
-                            </script>
-
-                            <!--3rd img-->
-                            <div class="carousel-item">
-                              <div class="profile-pic">
-                                <label class="-label" for="fileTwit3">
-                                  <ion-icon name="camera"></ion-icon>
-                                  <span>Change Image</span>
-                                </label>
-                                <img src="/images/p3.png" id="twit3" width="100%" height="200" />
-                                <input id="fileTwit3" type="file" onchange="loadtwit3(event)" style="display: none" />
-                              </div>
-                            </div>
-
-                            <!--to allow the user choose the image1-->
-                            <script>
-                              const loadtwit3 = function (event) {
-                                const imagetwit3 = document.getElementById("twit3");
-                                imagetwit3.src = URL.createObjectURL(
-                                  event.target.files[0],
-                                );
-                              };
-                            </script>
-                          </div>
-
-                          <!--the arrows for img to go back & forth-->
-                          <button class="carousel-control-prev" type="button" data-bs-target="#ed1"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
-                          <button class="carousel-control-next" type="button" data-bs-target="#ed1"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
-                        </div>
-                      </span>
-                    </div>
-                    <p>
-                      <!--button inside project form -->
-                    </p>
-                    <!--To delete the 1st project-->
-                    <script>
-                      async function removeTwit(id) {
-                        const res = await fetch(`http://localhost:5000/deleteProject/${id}`, { method: "POST" });
-                        location.reload()
-                      }
-                    </script>
+                    </form>
                   </div>
                 </div>
-                <% }) %>
 
-                  <!-- ----------------------------------------------------------------------- -->
-                  <!--ALLOWING USER TO ADD PROJECT:-->
-                  <div id="addP" class="card youtube">
-                    <div class="row">
-                      <!--1st row: project inf to fill-->
-                      <div class="col-sm-6">
-                        <div class="listing-container">
-                          <!--collect proj inf from user using a form-->
-                          <form class="inputs-container" action="/addProject" method="POST"
-                            enctype="multipart/form-data">
-                            <!--1st info: name of proj-->
-                            <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Name:
-                              <input type="text" name="name" class="simple-input" placeholder="Project Name" required />
+                <!--2nd row: project img to fill-->
+                <div class="col-sm-6">
+                  <!--4th info: img for proj using carousal-->
+                  <span data-label="Image for your project:" style="color: #c56b85">
+                    <div id="ed1" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                      <div class="carousel-inner">
+                        <!--1st img-->
+                        <div class="carousel-item active">
+                          <div class="profile-pic">
+                            <label class="-label" for="fileTwit1">
+                              <ion-icon name="camera"></ion-icon>
+                              <span>Change Image</span>
                             </label>
-                            <br /><br />
-                            <!--2nd info: description of proj-->
-                            <span data-label="Project Description:">
-                              <input type="text" name="description" placeholder="Project Description"
-                                class="js-sauce-name" style="color: #345d7d" />
-                            </span>
-                            <br /><br />
-                            <!--3rd info: type of proj-->
-                            <span data-label="Type of Your Project:">
-                              <input type="checkbox" class="js-sauce-name" id="filmmaker" name="filmmaker"
-                                value="filmmaker" />
-                              <label for="filmmaker" style="color: #345d7d">
-                                Filmmaker</label><br />
-                              <input type="checkbox" class="js-sauce-name" id="webdes" name="webdes"
-                                value="Web Designer" />
-                              <label for="webdes" style="color: #345d7d">
-                                Web Designer</label><br />
-                              <input type="checkbox" class="js-sauce-name" id="branddes" name="branddes"
-                                value="Brand Designer" />
-                              <label for="branddes" style="color: #345d7d">
-                                Brand Designer</label><br />
-                              <input type="checkbox" class="js-sauce-name" id="vidgame" name="vidgame"
-                                value="Video Game" />
-                              <label for="vidgame" style="color: #345d7d">
-                                Video Game</label><br />
-                              <input type="checkbox" class="js-sauce-name" id="animator" name="animator"
-                                value="Animator" />
-                              <label for="branddes" style="color: #345d7d">
-                                Animator</label><br />
-                            </span>
-
-                            <!--plus sign to add new field-->
-                            <span class="js-add-sauce" style="border: none">
-                              <a href="#addSauce"><i class="icon icon-add"></i></a>
-                            </span>
+                            <img src="/images/p1.png" id="twit1" width="100%" height="200" />
+                            <input id="fileTwit1" type="file" onchange="loadtwit1(event)" style="display: none" />
+                          </div>
                         </div>
+
+                        <!--to allow the user choose the image1-->
+                        <script>
+                          const loadtwit1 = function (event) {
+                            const imagetwit1 = document.getElementById("twit1");
+                            imagetwit1.src = URL.createObjectURL(
+                              event.target.files[0],
+                            );
+                          };
+                        </script>
+
+                        <!--2nd img-->
+                        <div class="carousel-item">
+                          <div class="profile-pic">
+                            <label class="-label" for="fileTwit2">
+                              <ion-icon name="camera"></ion-icon>
+                              <span>Change Image</span>
+                            </label>
+                            <img src="/images/p2.png" id="twit2" width="100%" height="200" />
+                            <input id="fileTwit2" type="file" onchange="loadtwit2(event)" style="display: none" />
+                          </div>
+                        </div>
+
+                        <!--to allow the user choose the image1-->
+                        <script>
+                          const loadtwit2 = function (event) {
+                            const imagetwit2 = document.getElementById("twit2");
+                            imagetwit2.src = URL.createObjectURL(
+                              event.target.files[0],
+                            );
+                          };
+                        </script>
+
+                        <!--3rd img-->
+                        <div class="carousel-item">
+                          <div class="profile-pic">
+                            <label class="-label" for="fileTwit3">
+                              <ion-icon name="camera"></ion-icon>
+                              <span>Change Image</span>
+                            </label>
+                            <img src="/images/p3.png" id="twit3" width="100%" height="200" />
+                            <input id="fileTwit3" type="file" onchange="loadtwit3(event)" style="display: none" />
+                          </div>
+                        </div>
+
+                        <!--to allow the user choose the image1-->
+                        <script>
+                          const loadtwit3 = function (event) {
+                            const imagetwit3 = document.getElementById("twit3");
+                            imagetwit3.src = URL.createObjectURL(
+                              event.target.files[0],
+                            );
+                          };
+                        </script>
                       </div>
 
-                      <!--2nd row: project img to fill-->
-                      <div class="col-sm-6" style="margin-top: 50px">
-                        <!--4th info: img for proj using carousal-->
-                        <span data-label="Image for your project:" style="color: #c56b85">
-                          <!--img-->
-                          <label class="-label" for="fileadd1">
-                            <ion-icon name="camera"></ion-icon>
-                            <span>Add Image</span>
-                          </label>
-                          <img src="/images/img.png" id="addimg1" width="100%" height="200" multiple />
-                          <input name="images" id="fileadd1" type="file" onchange="loadadd1(event)"
-                            style="display: none" multiple />
-
-                          <!--to allow the user choose the image-->
-                          <script>
-                            const loadadd1 = function (event) {
-                              const imageAdd1 = document.getElementById("addimg1");
-                              imageAdd1.src = URL.createObjectURL(
-                                event.target.files[0],
-                              );
-                            };
-                          </script>
-                        </span>
-                      </div>
-
-                      <script>
-                        //add more feilds in the form using plus sign
-                        const addSauceButton =
-                          document.querySelector(".js-add-sauce > a");
-                        addSauceButton.onclick = (event) => {
-                          event.preventDefault();
-
-                          let inputs = document.querySelectorAll(".js-sauce-name"),
-                            lastInput = inputs[inputs.length - 1],
-                            addItems = true;
-
-                          [].map.call(inputs, (input) => {
-                            if (!input.value) {
-                              addItems = false;
-                              bounceEmptyInput(input);
-                            } else {
-                              input.style.animation = "none";
-                            }
-                          });
-
-                          if (addItems) {
-                            let listNode = document.createElement("span");
-                            let inputNode = document.createElement("input");
-                            inputNode.classList.add("js-sauce-name");
-                            inputNode.placeholder = "Additional information:";
-                            inputNode.name = "additionalInfo"
-                            listNode.style.display = "none";
-                            listNode.classList.add("awaiting-init");
-                            listNode.appendChild(inputNode);
-
-                            lastInput.parentNode.after(listNode);
-                            setTimeout(() => {
-                              let awaitInit = document.querySelector(".awaiting-init");
-                              slideDown(awaitInit);
-                              awaitInit.classList.remove("awaiting-init");
-                            }, 100);
-                          } else {
-                            console.log("Unable to add field. One or more is empty.");
-                          }
-                        };
-
-                        const bounceEmptyInput = (childEl) => {
-                          childEl.parentNode.style.animation = "bounceError .8s ease";
-                          childEl.style.animation = "editInput 1s infinite";
-                          setTimeout(() => {
-                            childEl.parentNode.style.animation = "none";
-                          }, 850);
-                        };
-
-                        // Check each input if they are not empty
-                        // Slide Function
-                        let slideUp = (target, duration = 500) => {
-                          target.style.transitionProperty = "height, margin, padding";
-                          target.style.transitionDuration = duration + "ms";
-                          target.style.boxSizing = "border-box";
-                          target.style.height = target.offsetHeight + "px";
-                          target.offsetHeight;
-                          target.style.overflow = "hidden";
-                          target.style.height = 0;
-                          target.style.paddingTop = 0;
-                          target.style.paddingBottom = 0;
-                          target.style.marginTop = 0;
-                          target.style.marginBottom = 0;
-                          window.setTimeout(() => {
-                            target.style.display = "none";
-                            target.style.removeProperty("height");
-                            target.style.removeProperty("padding-top");
-                            target.style.removeProperty("padding-bottom");
-                            target.style.removeProperty("margin-top");
-                            target.style.removeProperty("margin-bottom");
-                            target.style.removeProperty("overflow");
-                            target.style.removeProperty("transition-duration");
-                            target.style.removeProperty("transition-property");
-                          }, duration);
-                        };
-
-                        let slideDown = (target, duration = 1000) => {
-                          target.style.removeProperty("display");
-                          let display = window.getComputedStyle(target).display;
-
-                          if (display === "none") display = "flex";
-
-                          target.style.display = display;
-                          let height = target.offsetHeight;
-                          target.style.overflow = "hidden";
-                          target.style.height = 0;
-                          target.style.paddingTop = 0;
-                          target.style.paddingBottom = 0;
-                          target.style.marginTop = 0;
-                          target.style.marginBottom = 0;
-                          target.offsetHeight;
-                          target.style.boxSizing = "border-box";
-                          target.style.transitionProperty = "height, margin, padding";
-                          target.style.transitionDuration = duration + "ms";
-                          target.style.height = height + "px";
-                          target.style.removeProperty("padding-top");
-                          target.style.removeProperty("padding-bottom");
-                          target.style.removeProperty("margin-top");
-                          target.style.removeProperty("margin-bottom");
-                          window.setTimeout(() => {
-                            target.style.removeProperty("height");
-                            target.style.removeProperty("overflow");
-                            target.style.removeProperty("transition-duration");
-                            target.style.removeProperty("transition-property");
-                          }, duration);
-                        };
-                        var slideToggle = (target, duration = 500) => {
-                          if (window.getComputedStyle(target).display === "none") {
-                            return slideDown(target, duration);
-                          } else {
-                            return slideUp(target, duration);
-                          }
-                        };
-                      </script>
-
-                      <!--button inside project form -->
-                      <p>
-                        <button class="btn" type="submit">
-                          <span id="label" style="font-size: 14px; font-weight: bold">Submit Project</span>
-                        </button>
-                      </p>
+                      <!--the arrows for img to go back & forth-->
+                      <button class="carousel-control-prev" type="button" data-bs-target="#ed1" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#ed1" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
                     </div>
-                    </form>
-
-                  </div>
-
-                  <!--button to add new project-->
-                  <% if (!guest) { %>
-
-                    <button id="newP" class="btn">
-                      <span id="label" style="font-size: 14px; font-weight: bold">Click to Add New Project</span>
-                    </button>
-                    <% } %>
-
-                      <!--to allow adding new project-->
-                      <script>
-                        const btn = document.getElementById("newP");
-                        btn.addEventListener("click", () => {
-                          const form = document.getElementById("addP");
-
-                          if (form.style.display == "block") {
-                            // 👇️ this HIDES the form
-                            form.style.display = "none";
-                          } else {
-                            // 👇️ this SHOWS the form
-                            form.style.display = "block";
-                          }
-                        });
-                      </script>
+                  </span>
+                </div>
+                <p>
+                  <!--button inside project form -->
+                </p>
+                <!--To delete the 1st project-->
+                <script>
+                  async function removeTwit(id) {
+                    const res = await fetch(`http://localhost:5000/deleteProject/${id}`, {
+                      method: "POST"
+                    });
+                    location.reload()
+                  }
+                </script>
+              </div>
             </div>
+            <% }) %>
+
+            <!-- ----------------------------------------------------------------------- -->
+            <!--ALLOWING USER TO ADD PROJECT:-->
+            <div id="addP" class="card youtube">
+              <div class="row">
+                <!--1st row: project inf to fill-->
+                <div class="col-sm-6">
+                  <div class="listing-container">
+                    <!--collect proj inf from user using a form-->
+                    <form class="inputs-container" action="/addProject" method="POST" enctype="multipart/form-data">
+                      <!--1st info: name of proj-->
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Name:
+                        <input type="text" name="name" class="simple-input" placeholder="Project Name" required />
+                      </label>
+                      <br /><br />
+                      <!--2nd info: description of proj-->
+                      <span data-label="Project Description:">
+                        <input type="text" name="description" placeholder="Project Description" class="js-sauce-name"
+                          style="color: #345d7d" required />
+                      </span>
+                      <br /><br />
+                      <!--3rd info: type of proj-->
+                      <span data-label="Type of Your Project:">
+                        <input type="checkbox" class="js-sauce-name" id="filmmaker" name="filmmaker"
+                          value="filmmaker" />
+                        <label for="filmmaker" style="color: #345d7d">
+                          Filmmaker</label><br />
+                        <input type="checkbox" class="js-sauce-name" id="webdes" name="webdes" value="Web Designer" />
+                        <label for="webdes" style="color: #345d7d">
+                          Web Designer</label><br />
+                        <input type="checkbox" class="js-sauce-name" id="branddes" name="branddes"
+                          value="Brand Designer" />
+                        <label for="branddes" style="color: #345d7d">
+                          Brand Designer</label><br />
+                        <input type="checkbox" class="js-sauce-name" id="vidgame" name="vidgame" value="Video Game" />
+                        <label for="vidgame" style="color: #345d7d">
+                          Video Game</label><br />
+                        <input type="checkbox" class="js-sauce-name" id="animator" name="animator" value="Animator" />
+                        <label for="branddes" style="color: #345d7d">
+                          Animator</label><br />
+                      </span>
+
+                      <!--plus sign to add new field-->
+                      <span class="js-add-sauce" style="border: none">
+                        <a role="button"><i class="icon icon-add"></i></a>
+                      </span>
+                  </div>
+                </div>
+
+                <!--2nd row: project img to fill-->
+                <div class="col-sm-6" style="margin-top: 50px">
+                  <!--4th info: img for proj using carousal-->
+                  <span data-label="Image for your project:" style="color: #c56b85">
+                    <!--img-->
+                    <label class="-label" for="fileadd1">
+                      <ion-icon name="camera"></ion-icon>
+                      <span>Add Image</span>
+                    </label>
+                    <img src="/images/img.png" id="addimg1" width="100%" height="200" multiple />
+                    <input name="images" id="fileadd1" type="file" onchange="loadadd1(event)" style="display: none"
+                      multiple />
+
+                    <!--to allow the user choose the image-->
+                    <script>
+                      const loadadd1 = function (event) {
+                        const imageAdd1 = document.getElementById("addimg1");
+                        imageAdd1.src = URL.createObjectURL(
+                          event.target.files[0],
+                        );
+                      };
+                    </script>
+                  </span>
+                </div>
+
+                <script>
+                  //add more fields in the form using plus sign
+                  // Select the "add sauce" button and initialize a variable to keep track of whether an additional input field has been added
+                  const addSauceButton = document.querySelector(".js-add-sauce > a");
+                  let hasAdditionalInput = false;
+
+                  // Add an event listener to the "add sauce" button that adds a new input field to the form when clicked
+                  addSauceButton.onclick = (event) => {
+                    // Prevent the default behavior of the button
+                    event.preventDefault();
+
+                    // Check if an additional input field has already been added
+                    if (!hasAdditionalInput) {
+                      // Create a new input field and append it to the form
+                      let listNode = document.createElement("span");
+                      let inputNode = document.createElement("input");
+                      inputNode.classList.add("js-sauce-name");
+                      inputNode.placeholder = "Additional information:";
+                      inputNode.name = "additionalInfo"
+                      listNode.style.display = "none";
+                      listNode.classList.add("awaiting-init");
+                      listNode.appendChild(inputNode);
+
+                      let lastInput = document.querySelectorAll(".js-sauce-name")[document.querySelectorAll(
+                        ".js-sauce-name").length - 1];
+                      lastInput.parentNode.after(listNode);
+
+                      // Animate the appearance of the new input field
+                      setTimeout(() => {
+                        let awaitInit = document.querySelector(".awaiting-init");
+                        slideDown(awaitInit);
+                        awaitInit.classList.remove("awaiting-init");
+                      }, 100);
+
+                      // Set the variable to true to indicate that an additional input field has been added
+                      hasAdditionalInput = true;
+                    } else {
+                      // Log an error message to the console if an additional input field has already been added
+                      console.log("Unable to add field. One additional field has already been added.");
+                    }
+                  };
+
+                  // Animate an empty input field by adding a bouncing animation
+                  const bounceEmptyInput = (childEl) => {
+                    childEl.parentNode.style.animation = "bounceError .8s ease";
+                    childEl.style.animation = "editInput 1s";
+                    setTimeout(() => {
+                      childEl.parentNode.style.animation = "none";
+                    }, 850);
+                  };
+
+                  // Animate an element by sliding it up and hiding it
+                  let slideUp = (target, duration = 500) => {
+                    target.style.transitionProperty = "height, margin, padding";
+                    target.style.transitionDuration = duration + "ms";
+                    target.style.boxSizing = "border-box";
+                    target.style.height = target.offsetHeight + "px";
+                    target.offsetHeight;
+                    target.style.overflow = "hidden";
+                    target.style.height = 0;
+                    target.style.paddingTop = 0;
+                    target.style.paddingBottom = 0;
+                    target.style.marginTop = 0;
+                    target.style.marginBottom = 0;
+                    window.setTimeout(() => {
+                      target.style.display = "none";
+                      target.style.removeProperty("height");
+                      target.style.removeProperty("padding-top");
+                      target.style.removeProperty("padding-bottom");
+                      target.style.removeProperty("margin-top");
+                      target.style.removeProperty("margin-bottom");
+                      target.style.removeProperty("overflow");
+                      target.style.removeProperty("transition-duration");
+                      target.style.removeProperty("transition-property");
+                    }, duration);
+                  };
+
+                  // Animate an element by sliding it down and showing it
+                  let slideDown = (target, duration = 1000) => {
+                    target.style.removeProperty("display");
+                    let display = window.getComputedStyle(target).display;
+
+                    if (display === "none") display = "flex";
+
+                    target.style.display = display;
+                    let height = target.offsetHeight;
+                    target.style.overflow = "hidden";
+                    target.style.height = 0;
+                    target.style.paddingTop = 0;
+                    target.style.paddingBottom = 0;
+                    target.style.marginTop = 0;
+                    target.style.marginBottom = 0;
+                    target.offsetHeight;
+                    target.style.boxSizing = "border-box";
+                    target.style.transitionProperty = "height, margin, padding";
+                    target.style.transitionDuration = duration + "ms";
+                    target.style.height = height + "px";
+                    target.style.removeProperty("padding-top");
+                    target.style.removeProperty("padding-bottom");
+                    target.style.removeProperty("margin-top");
+                    target.style.removeProperty("margin-bottom");
+                    window.setTimeout(() => {
+                      target.style.removeProperty("height");
+                      target.style.removeProperty("overflow");
+                      target.style.removeProperty("transition-duration");
+                      target.style.removeProperty("transition-property");
+                    }, duration);
+                  };
+
+                  // Animate an element by sliding it up or down depending on its current state
+                  var slideToggle = (target, duration = 500) => {
+                    if (window.getComputedStyle(target).display === "none") {
+                      return slideDown(target, duration);
+                    } else {
+                      return slideUp(target, duration);
+                    }
+                  };
+                </script>
+
+                <!--button inside project form -->
+                <p>
+                  <button class="btn" type="submit">
+                    <span id="label" style="font-size: 14px; font-weight: bold">Submit Project</span>
+                  </button>
+                </p>
+              </div>
+              </form>
+
+            </div>
+
+            <!--button to add new project-->
+            <% if (!guest) { %>
+
+            <button id="newP" class="btn">
+              <span id="label" style="font-size: 14px; font-weight: bold">Click to Add New Project</span>
+            </button>
+            <% } %>
+
+            <!--to allow adding new project-->
+            <script>
+              const btn = document.getElementById("newP");
+              btn.addEventListener("click", () => {
+                const form = document.getElementById("addP");
+
+                if (form.style.display == "block") {
+                  // 👇️ this HIDES the form
+                  form.style.display = "none";
+                } else {
+                  // 👇️ this SHOWS the form
+                  form.style.display = "block";
+                }
+              });
+            </script>
           </div>
         </div>
       </div>
-      </div>
-      </div>
-      </div>
-    </main>
+    </div>
+    </div>
+    </div>
+    </div>
+  </main>
 
-    <%- include('partials/footer.ejs') %>
+  <%- include('partials/footer.ejs') %>
 </body>
 
 </html>

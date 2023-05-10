@@ -50,11 +50,11 @@
       font-size: 30px;
     }
   </style>
-  </style>
 </head>
 
 <body>
   <div class="container">
+    <%- include('partials/nav-bar') %>
     <div class="row d-flex justify-content-center align-items-center h-80">
       <div class="col col-xl-10">
         <div class="card m-5" style="border-radius: 1rem">
@@ -104,33 +104,33 @@
                     Log into your account
                   </h5>
                   <% if (error) { %>
-                    <h5 style="color: red">
-                      <%= error %>
-                    </h5>
-                    <% } %>
+                  <h5 style="color: red">
+                    <%= error %>
+                  </h5>
+                  <% } %>
 
-                      <div class="input-container ic1">
-                        <input name="email" id="email" class="input" type="email" placeholder=" " />
-                        <span id="emailError" class="text-danger"></span><br />
-                        <div class="cut"></div>
-                        <label for="email" class="placeholders">Email</label>
-                      </div>
-                      <div class="input-container ic2">
-                        <input name="password" id="Password" class="input" type="password" placeholder=" " />
-                        <span id="passError" class="text-danger"></span><br />
-                        <div class="cut"></div>
-                        <label for="Password" class="placeholders">Password</label>
-                      </div>
+                  <div class="input-container ic1">
+                    <input name="email" id="email" class="input" type="email" placeholder=" " />
+                    <span id="emailError" class="text-danger"></span><br />
+                    <div class="cut"></div>
+                    <label for="email" class="placeholders">Email</label>
+                  </div>
+                  <div class="input-container ic2">
+                    <input name="password" id="Password" class="input" type="password" placeholder=" " />
+                    <span id="passError" class="text-danger"></span><br />
+                    <div class="cut"></div>
+                    <label for="Password" class="placeholders">Password</label>
+                  </div>
 
-                      <div class="buttons">
-                        <input class="btn-hover color-1" type="submit" value="Login" />
-                      </div>
+                  <div class="buttons">
+                    <input class="btn-hover color-1" type="submit" value="Login" />
+                  </div>
 
-                      <p style="color: #393f81; font-family: 'Ysabeau'">
-                        Don't have an account?
-                        <a href="/signup" style="color: #393f81; font-family: 'Ysabeau'">Register here</a>
-                      </p>
-                      <a href="#popup-box" class="small text-muted" style="font-family: 'Ysabeau'">Privacy policy</a>
+                  <p style="color: #393f81; font-family: 'Ysabeau'">
+                    Don't have an account?
+                    <a href="/signup" style="color: #393f81; font-family: 'Ysabeau'">Register here</a>
+                  </p>
+                  <a href="#popup-box" class="small text-muted" style="font-family: 'Ysabeau'">Privacy policy</a>
                 </form>
               </div>
             </div>
@@ -141,22 +141,33 @@
                 Designative Privacy policy:
               </h1>
               <b>
-                <p>policy1</p>
-                <p>policy1</p>
-                <p>policy1</p>
-                <p>policy1</p>
-                <p>policy1</p>
-                <p>policy1</p>
-                <p>policy1</p>
+                <p>Account Credentials:
+                  You are responsible for keeping your login credentials (i.e., username and password)
+                  confidential and secure. Do not share your account credentials with anyone else, and
+                  make sure to choose a strong password that is difficult to guess.</p>
+                <p>Account Lockout:
+                  For your security, we may lock your account if we detect multiple suspicious activity.
+                  If your account is locked, please contact us at <a
+                    href="mailto:designative.team@gmail.com">designative.team@gmail.com.</a>
+                  to verify your identity and regain access.</p>
+                <p>Logging and Monitoring:
+                  We log and monitor all login attempts and activity on our platform for security
+                  purposes. This includes recording IP addresses, device information, and other
+                  relevant data.</p>
+                <p>Session Timeout:
+                  To help protect your account, we automatically log you out of your Designative account after a period
+                  of inactivity. This helps to prevent unauthorized access to your account in case you forget to log
+                  out.</p>
+                <p>Designative is allowed to change the Login policy without prior notice.</p>
+
               </b>
-              <a href="#" class="box-close">
-                ×
-              </a>
+              <a href="#" class="box-close">×</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <%- include('partials/footer') %>
   </div>
 </body>
 

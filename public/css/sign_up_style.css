@@ -251,3 +251,123 @@ body {
 	text-align: center;
 	
 }
+   /* Set styles for header */
+    .header {
+        z-index: 1;
+        height: 100%;
+        min-height: 100px;
+
+    }
+
+    nav {
+        padding: 0 2% !important;
+    }
+
+    /* Set styles for header logo */
+    .header .navbar-brand {
+        font-size: 2.2rem !important;
+        font-weight: 700;
+    }
+
+    /* Set styles for first part of logo */
+    .navbar-brand span:first-child {
+        color: #c56b85;
+    }
+
+    /* Set styles for second part of logo */
+    .navbar-brand span:last-child {
+        color: #345d7d;
+    }
+
+    /*set styles for nav bar*/
+    .navbar-collapse a {
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+        color: #c56b85 !important;
+        transition: color 0.2s ease-in-out;
+        /* add a transition effect */
+    }
+
+    .navbar-collapse a:hover,
+    .login:hover,
+    .signup:hover, .navbar a.active:hover{
+        color: #6c3c49 !important;
+    }
+
+    .navbar a.active {
+        background-color: #c56b85 !important;
+        border-radius: 20px !important;
+        border: none !important;
+        color: white !important;
+		padding: 2%;
+		margin-top: 10%;
+    }
+
+    /* Set styles for signup and login */
+    .login,
+    .signup {
+        font-size: 1.1rem !important;
+        font-weight: 450 !important;
+        border-radius: 20px;
+        width: 90px;
+        text-align: center;
+        padding: 1%;
+    }
+
+    .signup-login {
+        margin-right: 0 3%;
+    }
+
+    .login {
+        color: #c56b85;
+    }
+
+    .signup {
+        background-color: #c56b85;
+        color: #ffffff;
+    }
+
+    .navbar-toggler {
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: solid 2px #345d7d;
+
+    }
+
+    @media (max-width: 992px) {
+        .header {
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .navbar-brand {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        .navbar-toggler {
+            margin-left: 20px;
+        }
+
+        .navbar-nav.ms-auto.align-items-center {
+            justify-content: center;
+        }
+
+        .signup-login {
+            margin-top: 10px;
+        }
+
+        .navbar-collapse:not(:empty) .signup-login {
+            margin: 10 auto !important;
+        }
+
+        .navbar-collapse a {
+            width: 100%;
+            text-align: center;
+        }
+
+        .navbar-collapse {
+            border-radius: 20px;
+            width: auto;
+        }
+    }

@@ -42,130 +42,158 @@
 		}
 
 		@import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+
+		#welcoming,
+		#welcoming2 {
+			font-size: 7vw;
+			letter-spacing: 0.3em;
+		}
+
+
+		@media screen and (min-width: 768px) {
+			#welcoming,
+			#welcoming2 {
+				font-size: 5vw;
+				letter-spacing: 0.2em;
+			}
+		}
+
+		.text-container {
+			display: flex;
+			flex-direction: column;
+			/* make the text go line down */
+			justify-content: center;
+			/* center the text vertically */
+			align-items: center;
+			/* center the text horizontally */
+			padding-right: 2%;
+		}
+
+		#welcoming3{
+			max-width: 100%;
+			/* make the text not go beyond its container */
+			margin-top: 1%;
+			margin-left: 16%;
+			font-size: 2rem;
+			color: #345D7D;
+			text-align:justify;
+		}
 	</style>
 </head>
 
 <body onload="provideName()">
 	<!--profile menu to open & close-->
 	<%- include('partials/nav-bar-auth.ejs') %>
-		<script>
-			document.querySelector('.mini-photo-wrapper').addEventListener('click', function () {
-				document.querySelector('.menu-container').classList.toggle('active');
-			});
-		</script>
-		<main>
-			<div class="patterns " style="padding: 5%">
-				<svg style="width:100%; height:500px;">
-					<defs>
-						<pattern id="polka-dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-							<circle fill="#F7D6E1" cx="25" cy="25" r="3"></circle>
-						</pattern>
-					</defs>
+	<script>
+		document.querySelector('.mini-photo-wrapper').addEventListener('click', function () {
+			document.querySelector('.menu-container').classList.toggle('active');
+		});
+	</script>
+	<main>
+		<div class="patterns" style="padding: 5%;">
+			<svg style="width:100vw; min-height:14vw">
+				<defs>
+					<pattern id="polka-dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+						<circle fill="#F7D6E1" cx="25" cy="25" r="3"></circle>
+					</pattern>
+				</defs>
 
-					<rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
-					<text id="welcoming" x="10%" y="30%">Welcome <%= name %>!</text>
-					<text id="welcoming2" x="15%" y="48%">Nice to meet you! </text>
+				<rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
 
-					<text id="welcoming3" x="16%" y="60%" style="letter-spacing: 2.5px;">Designative is a platform that
-						connects freelancers multimedia specialists with
-					</text>
-					<text id="welcoming3" x="16%" y="65%" style="letter-spacing: 2.53px;">individuals or corporations in
-						need of design work providing opportunities for
-					</text>
-					<text id="welcoming3" x="16%" y="70%">freelancers to showcase their work and experience, and get
-						benefit from companies
-					</text>
-					<text id="welcoming3" x="16%" y="75%" style="letter-spacing: 1.3px;">and individual's need. Beside
-						that we assest individuals and corporations to find the right
-					</text>
-					<text id="welcoming3" x="16%" y="80%">talent without committing to a particular worker.
-					</text>
-
-				</svg>
+				<text id="welcoming" x="10%" y="40%">Welcome <%= name %>!</text>
+				<text id="welcoming2" x="15%" y="90%">Nice to meet you! </text>
+			</svg>
+			<div class="text-container" >
+				<p id="welcoming3">Designative is a platform that connects freelancers multimedia specialists
+					with individuals or corporations in need of design work providing opportunities for
+					freelancers to showcase their work and experience, and get benefit from companies and
+					individual's need. Beside that we assest individuals and corporations to find the right
+					talent without committing to a particular worker.</p>
 			</div>
+		</div>
 
-			<hr style="color: black; ">
-			<p class="sentence2"> <span class="fancy">Visionaries </span></p>
-			<div class="w">
-				<div class="box">
-					<div class="imgBx">
-						<img src="/images/web.jpg">
-					</div>
-					<div class="content">
-						<div>
-							<h2>Web Developer</h2>
-							<p>design and create websites using programming languages, tools, and frameworks.
-							</p>
-						</div>
-					</div>
+		<p class="sentence2"> <span class="fancy">Visionaries </span></p>
+		<div class="w">
+			<div class="box">
+				<div class="imgBx">
+					<img src="/images/web.jpg">
 				</div>
-				<div class="box">
-					<div class="imgBx">
-						<img src="/images/designer.jpg">
-					</div>
-					<div class="content">
-						<div>
-							<h2>Animator</h2>
-							<p>create visual effects, motion graphics, and animated content for various mediums such as
-								films and television shows by using computer software and animation techniques.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="box">
-					<div class="imgBx">
-						<img src="/images/filmmaker.jpg">
-					</div>
-					<div class="content">
-						<div>
-							<h2>Filmmaker</h2>
-							<p>create films or videos by conceptualizing, planning, directing, and editing the
-								production process to convey a story, message, or artistic vision.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="box">
-					<div class="imgBx">
-						<img src="/images/animator.jpg">
-					</div>
-					<div class="content">
-						<div>
-							<h2>Brand Designer</h2>
-							<p>create and develop visual and graphic elements such as logos and other brand assets to
-								establish a recognizable and consistent brand identity for a company.
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="box">
-					<div class="imgBx">
-						<img src="/images/game.jpg">
-					</div>
-					<div class="content">
-						<div>
-							<h2>Game Developer</h2>
-							<p>design, develop, and program video games for various platforms using programming
-								languages, game engines, and other tools.
-							</p>
-						</div>
+				<div class="content">
+					<div>
+						<h2>Web Developer</h2>
+						<p>design and create websites using programming languages, tools, and frameworks.
+						</p>
 					</div>
 				</div>
 			</div>
-			<p class="sentence">crafting engaging </p>
-			<p class="sentence3"> <span class="fancy">digital worlds</span></p>
+			<div class="box">
+				<div class="imgBx">
+					<img src="/images/designer.jpg">
+				</div>
+				<div class="content">
+					<div>
+						<h2>Animator</h2>
+						<p>create visual effects, motion graphics, and animated content for various mediums such as
+							films and television shows by using computer software and animation techniques.
+						</p>
+					</div>
+				</div>
 			</div>
-		</main>
-		<!--Footer & nav-->
-		<%- include('partials/footer.ejs') %>
-			<script>
-				<!-- function provideName(){
-					// alert("This will Appear\nBefore any Contents" );
-					var name= ;			
-					// the elemet you are refering to must exist before this embeded script
-					document.getElementById("welcoming").innerHTML="Welcome "+ name +"!";
-				} -->
-			</script>
+			<div class="box">
+				<div class="imgBx">
+					<img src="/images/filmmaker.jpg">
+				</div>
+				<div class="content">
+					<div>
+						<h2>Filmmaker</h2>
+						<p>create films or videos by conceptualizing, planning, directing, and editing the
+							production process to convey a story, message, or artistic vision.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<div class="imgBx">
+					<img src="/images/animator.jpg">
+				</div>
+				<div class="content">
+					<div>
+						<h2>Brand Designer</h2>
+						<p>create and develop visual and graphic elements such as logos and other brand assets to
+							establish a recognizable and consistent brand identity for a company.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="box">
+				<div class="imgBx">
+					<img src="/images/game.jpg">
+				</div>
+				<div class="content">
+					<div>
+						<h2>Game Developer</h2>
+						<p>design, develop, and program video games for various platforms using programming
+							languages, game engines, and other tools.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="sentence">crafting engaging </p>
+		<p class="sentence3"> <span class="fancy">digital worlds</span></p>
+		</div>
+	</main>
+	<!--Footer & nav-->
+	<%- include('partials/footer.ejs') %>
+	<script>
+		<!-- function provideName(){
+		// alert("This will Appear\nBefore any Contents" );
+		var name = ;
+		// the element you are refering to must exist before this embeded script
+		document.getElementById("welcoming").innerHTML = "Welcome " + name + "!";
+		}
+		-->
+	</script>
 </body>
 
 </html>

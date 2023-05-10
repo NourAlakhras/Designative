@@ -52,9 +52,9 @@ app.use(async (req, res, next) => {
   if (req.session.user) {
     req.session.user = await User.findById(req.session.user._id);
     res.locals.role = req.session.user?.type;
-    res.locals.name = req.session.user.firstname + " " + req.session.user.lastname;
-    res.locals.image = req.session.user.image;
-    const notifications = await Notification.find({ userId: req.session.user._id });
+    res.locals.name = req.session.user?.firstname + " " + req.session.user?.lastname;
+    res.locals.image = req.session.user?.image;
+    const notifications = await Notification.find({ userId: req.session.user?._id });
     res.locals.notifications = notifications.reverse();
   }
   next();
