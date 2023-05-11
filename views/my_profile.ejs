@@ -120,9 +120,11 @@
                         <span id="label" style="font-size: 14px; font-weight: bold">Save Change</span>
                       </button>
                       <% } else { %>
-                      <a href="mailto:<%= user.email %>"
-                        style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;" class="btn">
-                        Contact</a>
+                      <button class="btn">
+                        <a href="mailto:<%= user.email %>"
+                          style="text-decoration: none;font-size: 14px; font-weight: bold; color:#F6F0F4;">
+                          Contact</a>
+                      </button>
                       <% } %>
                     </div>
                 </form>
@@ -153,10 +155,9 @@
                         style="color:#C56B85; text-align:center; font-weight:700; font-size:2.2em;">
                         Add Your Review </h2>
                       <div class="faq_box-wrapper">
-                        <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#c56b85;">
+                        <div class="faq_form-box-inner border border-2 rounded p-3" style="border:#345D7D;">
                           <span class="input-group-addon"></span>
-                          <p style="color:#725A7A; font-size: 1.4em; padding-bottom:0; margin-bottom: 0;"><%= name %>
-                          </p>
+                          <%= name %>
                           <form action="/addReview" method="post">
                             <input type="hidden" name="toId" value="<%= user._id %>">
                             <div class="input-group">
@@ -313,9 +314,6 @@
                   <p style="font-size: 17px; text-align: left; font-weight: 700" class="card-description text-dark">
                     <%= project.description %>
                   </p>
-                  <p style="font-size: 17px; text-align: left; font-weight: 700" class="card-description text-dark">
-                    <%= project.additionalInfo %>
-                  </p>
                   <% if (!guest) { %>
                   <a class="card-cta" role="button"
                     href="javascript:SwapDivsWithClick('<%= index %>','edit<%= index %>')">Edit</a>
@@ -373,123 +371,66 @@
                     <!--collect proj inf from user using a form-->
                     <form class="inputs-container" action="/updateProject" method="post">
                       <!--1st info: name of proj-->
-                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Project Name:
+                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">ProjectName:
                         <input type="text" name="name" class="simple-input" value="<%= project.name %>" />
                       </label>
                       <br /><br />
                       <!--2nd info: description of proj-->
                       <span data-label="Project Description:" class="input" role="textbox" contenteditable>
-                        <input type="textarea" name="description" class="simple-input"
-                          value="<%= project.description %>" />
+                        <input type="text" name="description" class="simple-input" value="<%= project.description %>" />
                       </span>
                       <br /><br />
-                      <label style="color: #c56b85; font-size: 15px; font-weight: 400">Additional Information:
-                        <input type="text" name="name" class="simple-input" value="<%= project.additionalInfo %>" />
-                      </label>
-                      <br /><br />
                       <input type="hidden" name="id" value="<%= project._id %>">
-                      <button class="btn" type="submit">
-                        <a id="label" style="
-                                font-size: 14px;
-                                font-weight: bold;
-                                text-decoration: none;
-                              " href="javascript:SwapDivsWithClick('swapper-first','swapper-other')">
-                          Update Project
-                        </a>
+                      <button class="btn" type="submit" id="label" style="
+                          font-size: 14px;
+                          font-weight: bold;
+                          text-decoration: none;
+                        " href="javascript:SwapDivsWithClick('swapper-first','swapper-other')">
+                        Update Project
                       </button>
-
+                      <!--to allow edit project when user click on edit button-->
+                      <script>
+                        function SwapDivsWithClick(div1, div2) {
+                          d1 = document.getElementById(div1);
+                          d2 = document.getElementById(div2);
+                          if (d2.style.display == "none") {
+                            d1.style.display = "none";
+                            d2.style.display = "block";
+                          } else {
+                            d1.style.display = "block";
+                            d2.style.display = "none";
+                          }
+                        }
+                      </script>
                     </form>
                   </div>
                 </div>
 
                 <!--2nd row: project img to fill-->
                 <div class="col-sm-6">
-                  <!--4th info: img for proj using carousal-->
-                  <span data-label="Image for your project:" style="color: #c56b85">
-                    <div id="ed1" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                      <div class="carousel-inner">
-                        <!--1st img-->
-                        <div class="carousel-item active">
-                          <div class="profile-pic">
-                            <label class="-label" for="fileTwit1">
-                              <ion-icon name="camera"></ion-icon>
-                              <span>Change Image</span>
-                            </label>
-                            <img src="/images/p1.png" id="twit1" width="100%" height="200" />
-                            <input id="fileTwit1" type="file" onchange="loadtwit1(event)" style="display: none" />
-                          </div>
-                        </div>
-
-                        <!--to allow the user choose the image1-->
-                        <script>
-                          const loadtwit1 = function (event) {
-                            const imagetwit1 = document.getElementById("twit1");
-                            imagetwit1.src = URL.createObjectURL(
-                              event.target.files[0],
-                            );
-                          };
-                        </script>
-
-                        <!--2nd img-->
-                        <div class="carousel-item">
-                          <div class="profile-pic">
-                            <label class="-label" for="fileTwit2">
-                              <ion-icon name="camera"></ion-icon>
-                              <span>Change Image</span>
-                            </label>
-                            <img src="/images/p2.png" id="twit2" width="100%" height="200" />
-                            <input id="fileTwit2" type="file" onchange="loadtwit2(event)" style="display: none" />
-                          </div>
-                        </div>
-
-                        <!--to allow the user choose the image1-->
-                        <script>
-                          const loadtwit2 = function (event) {
-                            const imagetwit2 = document.getElementById("twit2");
-                            imagetwit2.src = URL.createObjectURL(
-                              event.target.files[0],
-                            );
-                          };
-                        </script>
-
-                        <!--3rd img-->
-                        <div class="carousel-item">
-                          <div class="profile-pic">
-                            <label class="-label" for="fileTwit3">
-                              <ion-icon name="camera"></ion-icon>
-                              <span>Change Image</span>
-                            </label>
-                            <img src="/images/p3.png" id="twit3" width="100%" height="200" />
-                            <input id="fileTwit3" type="file" onchange="loadtwit3(event)" style="display: none" />
-                          </div>
-                        </div>
-
-                        <!--to allow the user choose the image1-->
-                        <script>
-                          const loadtwit3 = function (event) {
-                            const imagetwit3 = document.getElementById("twit3");
-                            imagetwit3.src = URL.createObjectURL(
-                              event.target.files[0],
-                            );
-                          };
-                        </script>
+                  <div id="edit-img<%= index %>" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                    <div class="carousel-inner">
+                      <!--1st img-->
+                      <% project.images.forEach(image=> { %>
+                      <div class="carousel-item active">
+                        <img src="/uploads/<%= image %>" class="d-block w-100" alt="img1" height="200px;" />
                       </div>
-
-                      <!--the arrows for img to go back & forth-->
-                      <button class="carousel-control-prev" type="button" data-bs-target="#ed1" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#ed1" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
+                      <% }) %>
                     </div>
-                  </span>
+                    <!--the arrows for img to go back & forth-->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#edit-img<%= index %>"
+                      data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#edit-img<%= index %>"
+                      data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
                 </div>
-                <p>
-                  <!--button inside project form -->
-                </p>
+
                 <!--To delete the 1st project-->
                 <script>
                   async function removeTwit(id) {
@@ -520,7 +461,7 @@
                       <!--2nd info: description of proj-->
                       <span data-label="Project Description:">
                         <input type="text" name="description" placeholder="Project Description" class="js-sauce-name"
-                          style="color: #345d7d" required />
+                          style="color: #345d7d" />
                       </span>
                       <br /><br />
                       <!--3rd info: type of proj-->
@@ -546,7 +487,7 @@
 
                       <!--plus sign to add new field-->
                       <span class="js-add-sauce" style="border: none">
-                        <a role="button"><i class="icon icon-add"></i></a>
+                        <a href="#addSauce"><i class="icon icon-add"></i></a>
                       </span>
                   </div>
                 </div>
@@ -577,19 +518,26 @@
                 </div>
 
                 <script>
-                  //add more fields in the form using plus sign
-                  // Select the "add sauce" button and initialize a variable to keep track of whether an additional input field has been added
-                  const addSauceButton = document.querySelector(".js-add-sauce > a");
-                  let hasAdditionalInput = false;
-
-                  // Add an event listener to the "add sauce" button that adds a new input field to the form when clicked
+                  //add more feilds in the form using plus sign
+                  const addSauceButton =
+                    document.querySelector(".js-add-sauce > a");
                   addSauceButton.onclick = (event) => {
-                    // Prevent the default behavior of the button
                     event.preventDefault();
 
-                    // Check if an additional input field has already been added
-                    if (!hasAdditionalInput) {
-                      // Create a new input field and append it to the form
+                    let inputs = document.querySelectorAll(".js-sauce-name"),
+                      lastInput = inputs[inputs.length - 1],
+                      addItems = true;
+
+                    [].map.call(inputs, (input) => {
+                      if (!input.value) {
+                        addItems = false;
+                        bounceEmptyInput(input);
+                      } else {
+                        input.style.animation = "none";
+                      }
+                    });
+
+                    if (addItems) {
                       let listNode = document.createElement("span");
                       let inputNode = document.createElement("input");
                       inputNode.classList.add("js-sauce-name");
@@ -599,35 +547,27 @@
                       listNode.classList.add("awaiting-init");
                       listNode.appendChild(inputNode);
 
-                      let lastInput = document.querySelectorAll(".js-sauce-name")[document.querySelectorAll(
-                        ".js-sauce-name").length - 1];
                       lastInput.parentNode.after(listNode);
-
-                      // Animate the appearance of the new input field
                       setTimeout(() => {
                         let awaitInit = document.querySelector(".awaiting-init");
                         slideDown(awaitInit);
                         awaitInit.classList.remove("awaiting-init");
                       }, 100);
-
-                      // Set the variable to true to indicate that an additional input field has been added
-                      hasAdditionalInput = true;
                     } else {
-                      // Log an error message to the console if an additional input field has already been added
-                      console.log("Unable to add field. One additional field has already been added.");
+                      console.log("Unable to add field. One or more is empty.");
                     }
                   };
 
-                  // Animate an empty input field by adding a bouncing animation
                   const bounceEmptyInput = (childEl) => {
                     childEl.parentNode.style.animation = "bounceError .8s ease";
-                    childEl.style.animation = "editInput 1s";
+                    childEl.style.animation = "editInput 1s infinite";
                     setTimeout(() => {
                       childEl.parentNode.style.animation = "none";
                     }, 850);
                   };
 
-                  // Animate an element by sliding it up and hiding it
+                  // Check each input if they are not empty
+                  // Slide Function
                   let slideUp = (target, duration = 500) => {
                     target.style.transitionProperty = "height, margin, padding";
                     target.style.transitionDuration = duration + "ms";
@@ -653,7 +593,6 @@
                     }, duration);
                   };
 
-                  // Animate an element by sliding it down and showing it
                   let slideDown = (target, duration = 1000) => {
                     target.style.removeProperty("display");
                     let display = window.getComputedStyle(target).display;
@@ -684,8 +623,6 @@
                       target.style.removeProperty("transition-property");
                     }, duration);
                   };
-
-                  // Animate an element by sliding it up or down depending on its current state
                   var slideToggle = (target, duration = 500) => {
                     if (window.getComputedStyle(target).display === "none") {
                       return slideDown(target, duration);
