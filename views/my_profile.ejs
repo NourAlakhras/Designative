@@ -334,6 +334,15 @@
                       }
                     }
                   </script>
+                  <!--To delete the 1st project-->
+                  <script>
+                    async function removeTwit(id) {
+                      const res = await fetch(`http://localhost:5000/deleteProject/${id}`, {
+                        method: "POST"
+                      });
+                      location.reload()
+                    }
+                  </script>
                 </div>
 
                 <!--carusal/img related to project-->
